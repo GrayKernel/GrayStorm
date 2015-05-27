@@ -1,0 +1,115 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{56F35D53-1BD9-4B60-9A90-D65B3F897BCF}</ProjectGuid>
+    <OutputType>WinExe</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>GrayStorm</RootNamespace>
+    <AssemblyName>GrayStorm</AssemblyName>
+    <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.DirectoryServices" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Deployment" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="assemblyHelpers\assemblyHelpers.cs" />
+    <Compile Include="assemblyHelpers\signatures.cs" />
+    <Compile Include="beaEngine\Constants.cs" />
+    <Compile Include="beaEngine\Disassemble.cs" />
+    <Compile Include="beaEngine\Engine.cs" />
+    <Compile Include="beaEngine\Structs.cs" />
+    <Compile Include="GUI\memoryHijacker.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="GUI\memoryHijacker.Designer.cs">
+      <DependentUpon>memoryHijacker.cs</DependentUpon>
+    </Compile>
+    <Compile Include="memoryHijacking\domainTraverser.cs" />
+    <Compile Include="GUI\GrayStorm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="GUI\GrayStorm.Designer.cs">
+      <DependentUpon>GrayStorm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="GUI\hierarchyViewer.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="GUI\hierarchyViewer.Designer.cs">
+      <DependentUpon>hierarchyViewer.cs</DependentUpon>
+    </Compile>
+    <Compile Include="GUI\shellcode.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="GUI\shellcode.Designer.cs">
+      <DependentUpon>shellcode.cs</DependentUpon>
+    </Compile>
+    <Compile Include="memoryHijacking\methodDumping.cs" />
+    <Compile Include="memoryHijacking\methodHelpers.cs" />
+    <Compile Include="memoryHijacking\methodHijacking.cs" />
+    <Compile Include="memoryHijacking\methodInvoking.cs" />
+    <Compile Include="memoryHijacking\StorageInformation.cs" />
+    <Compile Include="objectHunter\foundObject.cs" />
+    <Compile Include="objectHunter\heapObjects.cs" />
+    <Compile Include="Program.cs" />
+    <Compile Include="shellcodes\CToAsmAttackChain.cs" />
+    <Compile Include="shellcodes\dataBox.cs" />
+    <Compile Include="shellcodes\payloads.cs" />
+    <EmbeddedResource Include="GUI\GrayStorm.resx">
+      <DependentUpon>GrayStorm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="GUI\hierarchyViewer.resx">
+      <DependentUpon>hierarchyViewer.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="GUI\memoryHijacker.resx">
+      <DependentUpon>memoryHijacker.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="GUI\shellcode.resx">
+      <DependentUpon>shellcode.cs</DependentUpon>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Properties\" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>
