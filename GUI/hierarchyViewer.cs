@@ -27,14 +27,14 @@ namespace GrayStorm
         void hierarchyViewer_selectedMethod(MethodInfo targetMethod, TreeNode TN)
         {
             domainTraverser.currentMethod = targetMethod;
-            GrayStorm.grayStorm._methodLabel_LB.Text = TN.Parent.Text + targetMethod.Name;
+            GrayStorm.grayStorm._methodLabel_TB.Text = TN.Parent.Text + "." + targetMethod.Name;
 
         }
 
         void hierarchyViewer_selectedConstructor(ConstructorInfo targetConstructor, TreeNode TN)
         {
             domainTraverser.currentConstructor = targetConstructor;
-            GrayStorm.grayStorm._constructorLabel_LB.Text = TN.Parent.Text + TN.Text;
+            GrayStorm.grayStorm._constructorLabel_TB.Text = TN.Parent.Text + "." + TN.Text;
         }
 
         private void refreshDomain_BT_Click(object sender, EventArgs e)
@@ -57,7 +57,7 @@ namespace GrayStorm
             buildTree();
         }
 
-      
+
         #endregion init
 
         #region treeNode
@@ -88,7 +88,8 @@ namespace GrayStorm
             {
                 if (domainAssemblies.ContainsKey(theSelectedNode))
                 {
-                    var assemblySelected = domainAssemblies[theSelectedNode];
+                    Assembly assemblySelected = domainAssemblies[theSelectedNode];
+                    
 
                     Type[] types = assemblySelected.GetTypes();
                     foreach (Type type in types)
@@ -110,6 +111,11 @@ namespace GrayStorm
                 else if (constructors.ContainsKey(theSelectedNode))
                 {
                     ConstructorInfo constructorSelected = constructors[theSelectedNode];
+
+                    Assembly assemblySelected = domainAssemblies[theSelectedNode.Parent.Parent];
+                    domainTraverser.assemblyInfo = assemblySelected;
+                    domainTraverser.typeInfo = assemblySelected.GetType(theSelectedNode.Parent.Text);
+
 
                     if (selectedConstructor != null && constructorSelected != null)
                         selectedConstructor(constructorSelected, theSelectedNode);
@@ -135,7 +141,8 @@ namespace GrayStorm
 
                 foreach (ConstructorInfo constructorInfo in constructorList)
                 {
-                    System.Windows.Forms.TreeNode asmMethod = new TreeNode(constructorInfo.Name);
+                    object fullConType = constructorInfo as object;
+                    System.Windows.Forms.TreeNode asmMethod = new TreeNode(fullConType.ToString());
                     parent.Nodes.Add(asmMethod);
                     constructors.Add(asmMethod, constructorInfo);
                 }
@@ -144,7 +151,77 @@ namespace GrayStorm
         }
         #endregion
 
-       
+        #region rightClickMenu
+
+        private void dumpToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            grayStorm._memoryHijacker.setDisassembleUnchecked();
+            grayStorm._memoryHijacker.dumpAsm_BT_Click(null, null);
+        }
+
+        private void disassembleToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            grayStorm._memoryHijacker.setDisassembleChecked();
+            grayStorm._memoryHijacker.dumpAsm_BT_Click(null, null);
+        }
+
+        private void reDumpToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            int containedIndex = getContainedIndex();
+            if (containedIndex > 0)
+            {
+                methodHelpers.StorageInformationArrayList[containedIndex].dumped = false;
+                grayStorm._memoryHijacker.dumpAsm_BT_Click(null, null);
+            }
+        }
+
+        private void restoreMethodToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            int containedIndex = getContainedIndex();
+            if (containedIndex == -1)
+                return;
+            try
+            {
+                GrayStorm.assemblyHelpers.holder = methodHelpers.StorageInformationArrayList[containedIndex].oldMethod;
+                methodHijacking.writeAMethod(methodHelpers.StorageInformationArrayList[containedIndex].methodIntPtr);
+                methodHelpers.StorageInformationArrayList[containedIndex].dumped = false;
+            }
+            catch { }
+        }
+
+        private void showILCodeToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            grayStorm._memoryHijacker.getIL_BT_Click(null, null);
+        }
+
+        private void replaceMethodWithCustomCToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            MethodInfo replacement = grayStorm._memoryHijacker.dynamicMethods_LB.SelectedItem as MethodInfo;
+            if (replacement == null || domainTraverser.currentMethod == null)
+                return;
+            dynamic_C.methodReplacer.replaceIL(domainTraverser.currentMethod, replacement);
+        }
+
+        int savedCachePtr = -1;
+        private void cacheReplacerMethodToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            int containedIndex = getContainedIndex();
+            if (containedIndex == -1)
+            {
+                grayStorm._memoryHijacker.dumpAsm_BT_Click(null, null);
+                containedIndex = methodHelpers.containedInList(domainTraverser.currentMethod);
+            }
+            savedCachePtr = containedIndex;
+        }
+
+        private int getContainedIndex()
+        {
+            if (domainTraverser.currentMethod != null)
+                return methodHelpers.containedInList(domainTraverser.currentMethod);
+            else return -1;
+        }
+
+        #endregion rightClickMenu
     }
 }
     

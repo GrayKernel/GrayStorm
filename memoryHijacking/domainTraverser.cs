@@ -18,5 +18,23 @@ namespace GrayStorm
             get;
             set;
         }
+
+        public static System.Reflection.Assembly assemblyInfo
+        {
+            get;
+            set;
+        }
+
+        public static System.Type typeInfo
+        {
+            get;
+            set;
+        }
+
+        public static object curObject
+        {
+            get;
+            set;
+        }
     }
 }

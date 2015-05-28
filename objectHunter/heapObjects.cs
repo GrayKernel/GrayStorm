@@ -19,7 +19,7 @@ namespace GrayStorm.objectHunter
             //see if clr is version 2 or 4
             clrVersion = Environment.Version.ToString().ElementAt(0);
 
-            object thisObject = objectsListBox.SelectedItem;
+            object thisObject = domainTraverser.curObject;
             object foundObject = null;
             IntPtr obj = IntPtr.Zero;
             IntPtr methodTable = IntPtr.Zero;
@@ -27,11 +27,11 @@ namespace GrayStorm.objectHunter
             objectsListBox.Items.Clear();
             objectsListBox.Items.Add(thisObject);
 
-            if (thisObject.GetType() == typeof(foundObject))
-            {
-                foundObject thisFoundObject = thisObject as foundObject;
-                thisObject = thisFoundObject.targetObject;
-            }
+            //if (thisObject.GetType() == typeof(foundObject))
+            //{
+            //    foundObject thisFoundObject = thisObject as foundObject;
+            //    thisObject = thisFoundObject.targetObject;
+            //}
 
             //set subAmount on stack for each clr version
             if (IntPtr.Size == 4 && clrVersion == '2')
@@ -68,7 +68,8 @@ namespace GrayStorm.objectHunter
                 methodTable = getObjectMethodTable(obj, getMethodTablex64);
                 System.Windows.Forms.MessageBox.Show("OG MEtodTable is at " + methodTable.ToString("X"));
 
-                matchedObjects = getAllObjects(obj, methodTable, getMethodTablex64, get3rdEntryx64);
+                //TODO FIX 3rd ENTRY 
+                matchedObjects = getAllObjects(obj, methodTable, getMethodTablex64, getMethodTablex64);
             }
 
 

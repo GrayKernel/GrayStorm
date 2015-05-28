@@ -46,11 +46,11 @@
             this.disassemble_CB = new System.Windows.Forms.CheckBox();
             this.tabPage2 = new System.Windows.Forms.TabPage();
             this.panel4 = new System.Windows.Forms.Panel();
-            this.createShellcode_RTB = new System.Windows.Forms.RichTextBox();
-            this.createShellcode_BT = new System.Windows.Forms.Button();
             this.splitContainer3 = new System.Windows.Forms.SplitContainer();
-            this.payloadName_TB = new System.Windows.Forms.TextBox();
+            this.createShellcode_RTB = new System.Windows.Forms.RichTextBox();
             this.hookOffset_TB = new System.Windows.Forms.TextBox();
+            this.payloadName_TB = new System.Windows.Forms.TextBox();
+            this.createShellcode_BT = new System.Windows.Forms.Button();
             this.splitContainer1.Panel1.SuspendLayout();
             this.splitContainer1.Panel2.SuspendLayout();
             this.splitContainer1.SuspendLayout();
@@ -82,8 +82,8 @@
             // splitContainer1.Panel2
             // 
             this.splitContainer1.Panel2.Controls.Add(this.shellcodeEditor_TAB);
-            this.splitContainer1.Size = new System.Drawing.Size(854, 468);
-            this.splitContainer1.SplitterDistance = 283;
+            this.splitContainer1.Size = new System.Drawing.Size(654, 401);
+            this.splitContainer1.SplitterDistance = 216;
             this.splitContainer1.TabIndex = 0;
             // 
             // splitContainer2
@@ -103,8 +103,8 @@
             // splitContainer2.Panel2
             // 
             this.splitContainer2.Panel2.Controls.Add(this.panel1);
-            this.splitContainer2.Size = new System.Drawing.Size(283, 468);
-            this.splitContainer2.SplitterDistance = 146;
+            this.splitContainer2.Size = new System.Drawing.Size(216, 401);
+            this.splitContainer2.SplitterDistance = 125;
             this.splitContainer2.TabIndex = 7;
             // 
             // panel2
@@ -114,7 +114,7 @@
             this.panel2.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panel2.Location = new System.Drawing.Point(0, 0);
             this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(283, 146);
+            this.panel2.Size = new System.Drawing.Size(216, 125);
             this.panel2.TabIndex = 2;
             // 
             // payloads_LB
@@ -124,7 +124,7 @@
             this.payloads_LB.FormattingEnabled = true;
             this.payloads_LB.Location = new System.Drawing.Point(0, 13);
             this.payloads_LB.Name = "payloads_LB";
-            this.payloads_LB.Size = new System.Drawing.Size(283, 95);
+            this.payloads_LB.Size = new System.Drawing.Size(216, 95);
             this.payloads_LB.TabIndex = 1;
             this.payloads_LB.SelectedIndexChanged += new System.EventHandler(this.payloads_LB_SelectedIndexChanged);
             // 
@@ -148,7 +148,7 @@
             this.panel1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panel1.Location = new System.Drawing.Point(0, 0);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(283, 318);
+            this.panel1.Size = new System.Drawing.Size(216, 272);
             this.panel1.TabIndex = 7;
             // 
             // metaSploit_LB
@@ -158,7 +158,7 @@
             this.metaSploit_LB.FormattingEnabled = true;
             this.metaSploit_LB.Location = new System.Drawing.Point(1, 16);
             this.metaSploit_LB.Name = "metaSploit_LB";
-            this.metaSploit_LB.Size = new System.Drawing.Size(279, 95);
+            this.metaSploit_LB.Size = new System.Drawing.Size(212, 95);
             this.metaSploit_LB.TabIndex = 2;
             this.metaSploit_LB.SelectedIndexChanged += new System.EventHandler(this.metaSploit_LB_SelectedIndexChanged);
             // 
@@ -209,7 +209,7 @@
             this.shellcodeEditor_TAB.Location = new System.Drawing.Point(0, 0);
             this.shellcodeEditor_TAB.Name = "shellcodeEditor_TAB";
             this.shellcodeEditor_TAB.SelectedIndex = 0;
-            this.shellcodeEditor_TAB.Size = new System.Drawing.Size(567, 468);
+            this.shellcodeEditor_TAB.Size = new System.Drawing.Size(434, 401);
             this.shellcodeEditor_TAB.TabIndex = 0;
             // 
             // tabPage1
@@ -236,18 +236,20 @@
             // 
             // shellcode_RTB
             // 
+            this.shellcode_RTB.Dock = System.Windows.Forms.DockStyle.Fill;
             this.shellcode_RTB.Location = new System.Drawing.Point(0, 0);
             this.shellcode_RTB.Name = "shellcode_RTB";
-            this.shellcode_RTB.Size = new System.Drawing.Size(536, 337);
+            this.shellcode_RTB.Size = new System.Drawing.Size(553, 423);
             this.shellcode_RTB.TabIndex = 0;
             this.shellcode_RTB.Text = "";
             // 
             // disassemble_CB
             // 
             this.disassemble_CB.AutoSize = true;
-            this.disassemble_CB.Location = new System.Drawing.Point(0, 346);
+            this.disassemble_CB.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.disassemble_CB.Location = new System.Drawing.Point(0, 423);
             this.disassemble_CB.Name = "disassemble_CB";
-            this.disassemble_CB.Size = new System.Drawing.Size(83, 17);
+            this.disassemble_CB.Size = new System.Drawing.Size(553, 17);
             this.disassemble_CB.TabIndex = 7;
             this.disassemble_CB.Text = "disassemble";
             this.disassemble_CB.UseVisualStyleBackColor = true;
@@ -258,7 +260,7 @@
             this.tabPage2.Location = new System.Drawing.Point(4, 22);
             this.tabPage2.Name = "tabPage2";
             this.tabPage2.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage2.Size = new System.Drawing.Size(559, 442);
+            this.tabPage2.Size = new System.Drawing.Size(426, 375);
             this.tabPage2.TabIndex = 1;
             this.tabPage2.Text = "Shellcode Editor";
             this.tabPage2.UseVisualStyleBackColor = true;
@@ -269,28 +271,8 @@
             this.panel4.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panel4.Location = new System.Drawing.Point(3, 3);
             this.panel4.Name = "panel4";
-            this.panel4.Size = new System.Drawing.Size(553, 436);
+            this.panel4.Size = new System.Drawing.Size(420, 369);
             this.panel4.TabIndex = 0;
-            // 
-            // createShellcode_RTB
-            // 
-            this.createShellcode_RTB.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.createShellcode_RTB.Location = new System.Drawing.Point(0, 0);
-            this.createShellcode_RTB.Name = "createShellcode_RTB";
-            this.createShellcode_RTB.Size = new System.Drawing.Size(553, 332);
-            this.createShellcode_RTB.TabIndex = 0;
-            this.createShellcode_RTB.Text = "";
-            // 
-            // createShellcode_BT
-            // 
-            this.createShellcode_BT.Dock = System.Windows.Forms.DockStyle.Top;
-            this.createShellcode_BT.Location = new System.Drawing.Point(0, 0);
-            this.createShellcode_BT.Name = "createShellcode_BT";
-            this.createShellcode_BT.Size = new System.Drawing.Size(553, 46);
-            this.createShellcode_BT.TabIndex = 1;
-            this.createShellcode_BT.Text = "Create Shellcode";
-            this.createShellcode_BT.UseVisualStyleBackColor = true;
-            this.createShellcode_BT.Click += new System.EventHandler(this.createShellcode_BT_Click);
             // 
             // splitContainer3
             // 
@@ -308,25 +290,45 @@
             this.splitContainer3.Panel2.Controls.Add(this.hookOffset_TB);
             this.splitContainer3.Panel2.Controls.Add(this.payloadName_TB);
             this.splitContainer3.Panel2.Controls.Add(this.createShellcode_BT);
-            this.splitContainer3.Size = new System.Drawing.Size(553, 436);
-            this.splitContainer3.SplitterDistance = 332;
+            this.splitContainer3.Size = new System.Drawing.Size(420, 369);
+            this.splitContainer3.SplitterDistance = 280;
             this.splitContainer3.TabIndex = 2;
+            // 
+            // createShellcode_RTB
+            // 
+            this.createShellcode_RTB.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.createShellcode_RTB.Location = new System.Drawing.Point(0, 0);
+            this.createShellcode_RTB.Name = "createShellcode_RTB";
+            this.createShellcode_RTB.Size = new System.Drawing.Size(420, 280);
+            this.createShellcode_RTB.TabIndex = 0;
+            this.createShellcode_RTB.Text = "";
+            // 
+            // hookOffset_TB
+            // 
+            this.hookOffset_TB.Location = new System.Drawing.Point(237, 52);
+            this.hookOffset_TB.Name = "hookOffset_TB";
+            this.hookOffset_TB.Size = new System.Drawing.Size(140, 20);
+            this.hookOffset_TB.TabIndex = 3;
+            this.hookOffset_TB.Text = "Offset of hook (0 if none) ";
             // 
             // payloadName_TB
             // 
             this.payloadName_TB.Location = new System.Drawing.Point(4, 53);
             this.payloadName_TB.Name = "payloadName_TB";
-            this.payloadName_TB.Size = new System.Drawing.Size(227, 20);
+            this.payloadName_TB.Size = new System.Drawing.Size(140, 20);
             this.payloadName_TB.TabIndex = 2;
             this.payloadName_TB.Text = "Name of payload";
             // 
-            // hookOffset_TB
+            // createShellcode_BT
             // 
-            this.hookOffset_TB.Location = new System.Drawing.Point(269, 52);
-            this.hookOffset_TB.Name = "hookOffset_TB";
-            this.hookOffset_TB.Size = new System.Drawing.Size(281, 20);
-            this.hookOffset_TB.TabIndex = 3;
-            this.hookOffset_TB.Text = "Offset of hook (0 if none) ";
+            this.createShellcode_BT.Dock = System.Windows.Forms.DockStyle.Top;
+            this.createShellcode_BT.Location = new System.Drawing.Point(0, 0);
+            this.createShellcode_BT.Name = "createShellcode_BT";
+            this.createShellcode_BT.Size = new System.Drawing.Size(420, 46);
+            this.createShellcode_BT.TabIndex = 1;
+            this.createShellcode_BT.Text = "Create Shellcode";
+            this.createShellcode_BT.UseVisualStyleBackColor = true;
+            this.createShellcode_BT.Click += new System.EventHandler(this.createShellcode_BT_Click);
             // 
             // shellcode
             // 
@@ -334,7 +336,7 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.Controls.Add(this.splitContainer1);
             this.Name = "shellcode";
-            this.Size = new System.Drawing.Size(854, 468);
+            this.Size = new System.Drawing.Size(654, 401);
             this.splitContainer1.Panel1.ResumeLayout(false);
             this.splitContainer1.Panel2.ResumeLayout(false);
             this.splitContainer1.ResumeLayout(false);

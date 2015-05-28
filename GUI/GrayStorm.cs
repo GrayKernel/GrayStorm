@@ -12,10 +12,11 @@ namespace GrayStorm
     public partial class grayStorm : Form
     {
 
-        public static Label _methodLabel_LB;
-        public static Label _constructorLabel_LB;
+        public static TextBox _methodLabel_TB;
+        public static TextBox _constructorLabel_TB;
         hierarchyViewer _hierarchyViewer;
         shellcode _shellcode;
+        public static memoryHijacker _memoryHijacker;
         
         public grayStorm()
         {
@@ -26,8 +27,10 @@ namespace GrayStorm
             _shellcode = shellcodeTAB;
             _shellcode.loadShellcode();
 
-            _methodLabel_LB = methodLabel_LB;
-            _constructorLabel_LB = constructorLabel_LB;
+            _memoryHijacker = memoryHijacker1;
+
+            _methodLabel_TB = selectedMethod_TB;
+            _constructorLabel_TB = selectedConstructor_TB;
         }
 
       

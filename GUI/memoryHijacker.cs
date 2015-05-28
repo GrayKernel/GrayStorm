@@ -7,19 +7,22 @@ using System.Linq;
 using System.Text;
 using System.Windows.Forms;
 
-namespace GrayStorm.GUI
+namespace GrayStorm
 {
     public partial class memoryHijacker : UserControl
     {
         public memoryHijacker()
         {
             InitializeComponent();
-        }
 
+        }
         public StorageInformation currentMethod;
-        private void dumpAsm_BT_Click(object sender, EventArgs e)
+
+        #region buttons
+
+        public void dumpAsm_BT_Click(object sender, EventArgs e)
         {
-              editor_RTB.Clear();
+            editor_RTB.Clear();
             IntPtr trueIntPtr = IntPtr.Zero;
             Delegate targetMethodDelegate = null;
 
@@ -33,7 +36,7 @@ namespace GrayStorm.GUI
                 if (containedIndex != -1)
                 {
                     memory = dumper.dumpAMethod(methodHelpers.StorageInformationArrayList[containedIndex].methodIntPtr);
-                    realAddress_LB.Text = methodHelpers.StorageInformationArrayList[containedIndex].methodIntPtr.ToString("X");
+                    realAddress_TB.Text = methodHelpers.StorageInformationArrayList[containedIndex].methodIntPtr.ToString("X");
                     if (memory == null)
                     {
                         editor_RTB.AppendText(String.Format("COULD NOT READ MEMORY\n"));
@@ -68,7 +71,7 @@ namespace GrayStorm.GUI
                         currentMethod.methodDelegate = targetMethodDelegate;
                         methodHelpers.StorageInformationArrayList.Add(currentMethod);
                         containedIndex = methodHelpers.StorageInformationArrayList.Count - 1;
-                        realAddress_LB.Text = methodHelpers.StorageInformationArrayList[containedIndex].methodIntPtr.ToString("X");
+                        realAddress_TB.Text = methodHelpers.StorageInformationArrayList[containedIndex].methodIntPtr.ToString("X");
                     }
                 }
             }
@@ -85,7 +88,33 @@ namespace GrayStorm.GUI
                     editor_RTB.AppendText(String.Format("0x{0:X2}\n", b));
                 }
             }
-    }
+        }
+
+        public void getIL_BT_Click(object sender, EventArgs e)
+        {
+            if (domainTraverser.currentMethod == null)
+                return;
+            editor_RTB.Clear();
+            formatOutput formatOutput = new formatOutput();
+            foreach (ILInstruction instruciton in ILInstructionLoader.GetInstructions(domainTraverser.currentMethod))
+            {
+                editor_RTB.AppendText(instruciton.Offset.ToString("X4") + " " + instruciton.OpCode + " " + formatOutput.setUpDataFormat(instruciton) + "\n");
+            }
+        }
+
+        #endregion buttons
+
+        #region helpers
+        public void setDisassembleChecked()
+        {
+            disassemble_CB.Checked = true;
+        }
+
+        public void setDisassembleUnchecked()
+        {
+            disassemble_CB.Checked = false;
+        }
+        #endregion helpers
     }
 }
 

@@ -52,12 +52,32 @@
     <Compile Include="beaEngine\Disassemble.cs" />
     <Compile Include="beaEngine\Engine.cs" />
     <Compile Include="beaEngine\Structs.cs" />
+    <Compile Include="dynamicC\dynamicMethodGenerators.cs" />
+    <Compile Include="dynamicC\methodReplacer.cs" />
+    <Compile Include="dynamicC\userCreatedMethods.cs" />
+    <Compile Include="GUI\cSharpMethodWriter.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="GUI\cSharpMethodWriter.Designer.cs">
+      <DependentUpon>cSharpMethodWriter.cs</DependentUpon>
+    </Compile>
     <Compile Include="GUI\memoryHijacker.cs">
       <SubType>UserControl</SubType>
     </Compile>
     <Compile Include="GUI\memoryHijacker.Designer.cs">
       <DependentUpon>memoryHijacker.cs</DependentUpon>
     </Compile>
+    <Compile Include="GUI\MethodEditor.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="GUI\MethodEditor.Designer.cs">
+      <DependentUpon>MethodEditor.cs</DependentUpon>
+    </Compile>
+    <Compile Include="IL Disasm\ByteArrayExtensions.cs" />
+    <Compile Include="IL Disasm\formatOutput.cs" />
+    <Compile Include="IL Disasm\ILCode.cs" />
+    <Compile Include="IL Disasm\ILInstruction.cs" />
+    <Compile Include="IL Disasm\ILOpCodeTranslator.cs" />
     <Compile Include="memoryHijacking\domainTraverser.cs" />
     <Compile Include="GUI\GrayStorm.cs">
       <SubType>Form</SubType>
@@ -88,6 +108,10 @@
     <Compile Include="shellcodes\CToAsmAttackChain.cs" />
     <Compile Include="shellcodes\dataBox.cs" />
     <Compile Include="shellcodes\payloads.cs" />
+    <Compile Include="testClass.cs" />
+    <EmbeddedResource Include="GUI\cSharpMethodWriter.resx">
+      <DependentUpon>cSharpMethodWriter.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="GUI\GrayStorm.resx">
       <DependentUpon>GrayStorm.cs</DependentUpon>
     </EmbeddedResource>
@@ -96,6 +120,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="GUI\memoryHijacker.resx">
       <DependentUpon>memoryHijacker.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="GUI\MethodEditor.resx">
+      <DependentUpon>MethodEditor.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="GUI\shellcode.resx">
       <DependentUpon>shellcode.cs</DependentUpon>

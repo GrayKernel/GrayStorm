@@ -1,4 +1,4 @@
-﻿namespace GrayStorm.GUI
+﻿namespace GrayStorm
 {
     partial class memoryHijacker
     {
@@ -32,8 +32,9 @@
             this.dumpAsm_BT = new System.Windows.Forms.Button();
             this.getIL_BT = new System.Windows.Forms.Button();
             this.disassemble_CB = new System.Windows.Forms.CheckBox();
-            this.realAddress_LB = new System.Windows.Forms.ListBox();
             this.splitContainer1 = new System.Windows.Forms.SplitContainer();
+            this.realAddress_TB = new System.Windows.Forms.TextBox();
+            this.dynamicMethods_LB = new System.Windows.Forms.ListBox();
             this.splitContainer1.Panel1.SuspendLayout();
             this.splitContainer1.Panel2.SuspendLayout();
             this.splitContainer1.SuspendLayout();
@@ -66,6 +67,7 @@
             this.getIL_BT.TabIndex = 2;
             this.getIL_BT.Text = "Get IL Code";
             this.getIL_BT.UseVisualStyleBackColor = true;
+            this.getIL_BT.Click += new System.EventHandler(this.getIL_BT_Click);
             // 
             // disassemble_CB
             // 
@@ -77,14 +79,6 @@
             this.disassemble_CB.Text = "disassemble";
             this.disassemble_CB.UseVisualStyleBackColor = true;
             // 
-            // realAddress_LB
-            // 
-            this.realAddress_LB.FormattingEnabled = true;
-            this.realAddress_LB.Location = new System.Drawing.Point(3, 188);
-            this.realAddress_LB.Name = "realAddress_LB";
-            this.realAddress_LB.Size = new System.Drawing.Size(167, 17);
-            this.realAddress_LB.TabIndex = 4;
-            // 
             // splitContainer1
             // 
             this.splitContainer1.Dock = System.Windows.Forms.DockStyle.Fill;
@@ -93,7 +87,8 @@
             // 
             // splitContainer1.Panel1
             // 
-            this.splitContainer1.Panel1.Controls.Add(this.realAddress_LB);
+            this.splitContainer1.Panel1.Controls.Add(this.dynamicMethods_LB);
+            this.splitContainer1.Panel1.Controls.Add(this.realAddress_TB);
             this.splitContainer1.Panel1.Controls.Add(this.getIL_BT);
             this.splitContainer1.Panel1.Controls.Add(this.disassemble_CB);
             this.splitContainer1.Panel1.Controls.Add(this.dumpAsm_BT);
@@ -104,6 +99,21 @@
             this.splitContainer1.Size = new System.Drawing.Size(540, 391);
             this.splitContainer1.SplitterDistance = 180;
             this.splitContainer1.TabIndex = 5;
+            // 
+            // realAddress_TB
+            // 
+            this.realAddress_TB.Location = new System.Drawing.Point(13, 173);
+            this.realAddress_TB.Name = "realAddress_TB";
+            this.realAddress_TB.Size = new System.Drawing.Size(146, 20);
+            this.realAddress_TB.TabIndex = 4;
+            // 
+            // dynamicMethods_LB
+            // 
+            this.dynamicMethods_LB.FormattingEnabled = true;
+            this.dynamicMethods_LB.Location = new System.Drawing.Point(3, 230);
+            this.dynamicMethods_LB.Name = "dynamicMethods_LB";
+            this.dynamicMethods_LB.Size = new System.Drawing.Size(172, 147);
+            this.dynamicMethods_LB.TabIndex = 5;
             // 
             // memoryHijacker
             // 
@@ -126,7 +136,8 @@
         private System.Windows.Forms.Button dumpAsm_BT;
         private System.Windows.Forms.Button getIL_BT;
         private System.Windows.Forms.CheckBox disassemble_CB;
-        private System.Windows.Forms.ListBox realAddress_LB;
         private System.Windows.Forms.SplitContainer splitContainer1;
+        private System.Windows.Forms.TextBox realAddress_TB;
+        public System.Windows.Forms.ListBox dynamicMethods_LB;
     }
 }
