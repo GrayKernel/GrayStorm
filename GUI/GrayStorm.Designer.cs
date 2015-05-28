@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(grayStorm));
             this.information_panel = new System.Windows.Forms.Panel();
             this.selectedConstructor_TB = new System.Windows.Forms.TextBox();
             this.selectedMethod_TB = new System.Windows.Forms.TextBox();
@@ -35,13 +36,13 @@
             this.methodSelected_LB = new System.Windows.Forms.Label();
             this.splitContainer2 = new System.Windows.Forms.SplitContainer();
             this.splitContainer1 = new System.Windows.Forms.SplitContainer();
+            this.hierarchyViewer1 = new GrayStorm.hierarchyViewer();
             this.mainControl_TAB = new System.Windows.Forms.TabControl();
             this.tabPage1 = new System.Windows.Forms.TabPage();
-            this.tabPage2 = new System.Windows.Forms.TabPage();
-            this.tabPage3 = new System.Windows.Forms.TabPage();
-            this.hierarchyViewer1 = new GrayStorm.hierarchyViewer();
             this.memoryHijacker1 = new GrayStorm.memoryHijacker();
+            this.tabPage2 = new System.Windows.Forms.TabPage();
             this.shellcodeTAB = new GrayStorm.shellcode();
+            this.tabPage3 = new System.Windows.Forms.TabPage();
             this.cSharpMethodWriter1 = new GrayStorm.cSharpMethodWriter();
             this.tabPage4 = new System.Windows.Forms.TabPage();
             this.methodEditor1 = new GrayStorm.GUI.MethodEditor();
@@ -138,6 +139,14 @@
             this.splitContainer1.SplitterDistance = 279;
             this.splitContainer1.TabIndex = 0;
             // 
+            // hierarchyViewer1
+            // 
+            this.hierarchyViewer1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.hierarchyViewer1.Location = new System.Drawing.Point(0, 0);
+            this.hierarchyViewer1.Name = "hierarchyViewer1";
+            this.hierarchyViewer1.Size = new System.Drawing.Size(279, 462);
+            this.hierarchyViewer1.TabIndex = 0;
+            // 
             // mainControl_TAB
             // 
             this.mainControl_TAB.Controls.Add(this.tabPage1);
@@ -162,6 +171,14 @@
             this.tabPage1.Text = "Memory Hijacker";
             this.tabPage1.UseVisualStyleBackColor = true;
             // 
+            // memoryHijacker1
+            // 
+            this.memoryHijacker1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.memoryHijacker1.Location = new System.Drawing.Point(3, 3);
+            this.memoryHijacker1.Name = "memoryHijacker1";
+            this.memoryHijacker1.Size = new System.Drawing.Size(548, 430);
+            this.memoryHijacker1.TabIndex = 0;
+            // 
             // tabPage2
             // 
             this.tabPage2.Controls.Add(this.shellcodeTAB);
@@ -173,6 +190,14 @@
             this.tabPage2.Text = "Shellcode";
             this.tabPage2.UseVisualStyleBackColor = true;
             // 
+            // shellcodeTAB
+            // 
+            this.shellcodeTAB.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.shellcodeTAB.Location = new System.Drawing.Point(3, 3);
+            this.shellcodeTAB.Name = "shellcodeTAB";
+            this.shellcodeTAB.Size = new System.Drawing.Size(548, 430);
+            this.shellcodeTAB.TabIndex = 0;
+            // 
             // tabPage3
             // 
             this.tabPage3.Controls.Add(this.cSharpMethodWriter1);
@@ -182,30 +207,6 @@
             this.tabPage3.TabIndex = 2;
             this.tabPage3.Text = "Dynamic C#";
             this.tabPage3.UseVisualStyleBackColor = true;
-            // 
-            // hierarchyViewer1
-            // 
-            this.hierarchyViewer1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.hierarchyViewer1.Location = new System.Drawing.Point(0, 0);
-            this.hierarchyViewer1.Name = "hierarchyViewer1";
-            this.hierarchyViewer1.Size = new System.Drawing.Size(279, 462);
-            this.hierarchyViewer1.TabIndex = 0;
-            // 
-            // memoryHijacker1
-            // 
-            this.memoryHijacker1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.memoryHijacker1.Location = new System.Drawing.Point(3, 3);
-            this.memoryHijacker1.Name = "memoryHijacker1";
-            this.memoryHijacker1.Size = new System.Drawing.Size(548, 430);
-            this.memoryHijacker1.TabIndex = 0;
-            // 
-            // shellcodeTAB
-            // 
-            this.shellcodeTAB.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.shellcodeTAB.Location = new System.Drawing.Point(3, 3);
-            this.shellcodeTAB.Name = "shellcodeTAB";
-            this.shellcodeTAB.Size = new System.Drawing.Size(548, 430);
-            this.shellcodeTAB.TabIndex = 0;
             // 
             // cSharpMethodWriter1
             // 
@@ -239,6 +240,7 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(845, 503);
             this.Controls.Add(this.splitContainer2);
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "grayStorm";
             this.Text = "Gray Storm";
             this.information_panel.ResumeLayout(false);

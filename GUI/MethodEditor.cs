@@ -261,6 +261,8 @@ namespace GrayStorm.GUI
         {
             if (domainTraverser.curObject != null)
                 objectHunter.heapObjects.getAddresses(objectsListBox);
+
+            changeObjTree();
         }
 
         private void callInstanceMethodButt_Click(object sender, EventArgs e)
@@ -475,7 +477,128 @@ namespace GrayStorm.GUI
             methodArgs.Clear();
         }
 
+
+        private void changeObjTree()
+        {
+            try
+            {
+                objTreeView.Nodes.Clear();
+                object thisObj = null;
+
+
+                // object obj = objectsListBox.SelectedItem;
+
+                foreach (object obj in objectsListBox.Items)
+                {
+                    foundObject objectFound = obj as foundObject;
+
+                    if (objectFound == null)
+                        continue;
+
+                    if (objectFound.GetType() == typeof(foundObject))
+                    {
+                        foundObject foundObj = obj as foundObject;
+                        thisObj = foundObj.targetObject;
+                    }
+                    else
+                        thisObj = obj;
+
+                    TreeNode thisObject = new TreeNode(thisObj.ToString());
+                    FieldInfo[] fields = thisObj.GetType().GetFields((BindingFlags.Static | BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Instance) ^ (BindingFlags.GetProperty));//fields good properties bad
+
+                    TreeNode newObject = new TreeNode("Properties");
+                    newObject = getAllProperties(newObject, thisObj);
+                    thisObject.Nodes.Add(newObject);
+
+                    newObject = new TreeNode("Fields");
+                    newObject = getAllFields(newObject, thisObj);
+
+                    thisObject.Nodes.Add(newObject);
+                    //handle errors for getting each field! 
+                    //foreach (FieldInfo field in fields)
+                    //{
+
+                    //    newObject.Nodes.Add(field.ToString() + " " + getValue(field, thisObj));
+                    //}
+
+                    objTreeView.Nodes.Add(thisObject);
+                }
+                // objTreeView.ExpandAll();
+            }
+            catch { }
+        }
+
+        private TreeNode getAllProperties(TreeNode newObject, object thisObj)
+        {
+            try
+            {
+                foreach (PropertyInfo prop in thisObj.GetType().GetProperties(BindingFlags.Static | BindingFlags.Public | BindingFlags.Instance | BindingFlags.NonPublic))
+                {
+                    newObject.Nodes.Add(prop.ToString() + " " + getPropValue(prop, thisObj));
+                }
+                return newObject;
+            }
+            catch { return newObject; }
+        }
+        private object getPropValue(PropertyInfo prop, object thisObjIN)
+        {
+            try
+            {
+                object ret = null;
+                System.Threading.Thread call = new System.Threading.Thread
+                (
+               () =>
+               {
+                   try { ret = prop.GetValue(thisObjIN, null); }
+                   catch { return; }
+               }
+                 );
+                call.Start();
+                System.Threading.Thread.Sleep(10);
+                call.Abort();
+                return ret;
+            }
+            catch { return "cannot eval"; }
+        }
+
+        private TreeNode getAllFields(TreeNode newObject, object thisObj)
+        {
+            try
+            {
+                foreach (FieldInfo field in thisObj.GetType().GetFields(BindingFlags.Static | BindingFlags.Public | BindingFlags.Instance | BindingFlags.NonPublic))
+                {
+
+                    newObject.Nodes.Add(field.ToString() + " " + getFieldValue(field, thisObj));
+                }
+                return newObject;
+            }
+            catch { return newObject; }
+        }
+
+        private object getFieldValue(FieldInfo prop, object thisObjIN)
+        {
+            try
+            {
+                object ret = null;
+                System.Threading.Thread call = new System.Threading.Thread
+                (
+               () =>
+               {
+                   try { ret = prop.GetValue(thisObjIN); }
+                   catch { return; }
+               }
+                 );
+                call.Start();
+                System.Threading.Thread.Sleep(10);
+                call.Abort();
+                return ret;
+            }
+            catch { return "cannot eval"; }
+        }
+
         #endregion helperMethods
+
+      
 
 
     }

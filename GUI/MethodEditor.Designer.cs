@@ -69,6 +69,7 @@
             this.panel2 = new System.Windows.Forms.Panel();
             this.panel3 = new System.Windows.Forms.Panel();
             this.panel4 = new System.Windows.Forms.Panel();
+            this.tableLayoutPanel2 = new System.Windows.Forms.TableLayoutPanel();
             this.label1 = new System.Windows.Forms.Label();
             this.splitContainer1 = new System.Windows.Forms.SplitContainer();
             this.panel5 = new System.Windows.Forms.Panel();
@@ -78,6 +79,7 @@
             this.panel2.SuspendLayout();
             this.panel3.SuspendLayout();
             this.panel4.SuspendLayout();
+            this.tableLayoutPanel2.SuspendLayout();
             this.splitContainer1.Panel1.SuspendLayout();
             this.splitContainer1.Panel2.SuspendLayout();
             this.splitContainer1.SuspendLayout();
@@ -99,10 +101,11 @@
             // argumentsLabel
             // 
             this.argumentsLabel.AutoSize = true;
+            this.argumentsLabel.Dock = System.Windows.Forms.DockStyle.Fill;
             this.argumentsLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.argumentsLabel.Location = new System.Drawing.Point(3, 24);
+            this.argumentsLabel.Location = new System.Drawing.Point(3, 0);
             this.argumentsLabel.Name = "argumentsLabel";
-            this.argumentsLabel.Size = new System.Drawing.Size(116, 20);
+            this.argumentsLabel.Size = new System.Drawing.Size(314, 52);
             this.argumentsLabel.TabIndex = 79;
             this.argumentsLabel.Text = "Args to Enter";
             // 
@@ -111,7 +114,7 @@
             this.setConstant_Butt.Dock = System.Windows.Forms.DockStyle.Bottom;
             this.setConstant_Butt.Location = new System.Drawing.Point(0, 316);
             this.setConstant_Butt.Name = "setConstant_Butt";
-            this.setConstant_Butt.Size = new System.Drawing.Size(262, 23);
+            this.setConstant_Butt.Size = new System.Drawing.Size(261, 23);
             this.setConstant_Butt.TabIndex = 85;
             this.setConstant_Butt.Text = "Set Constant";
             this.setConstant_Butt.UseVisualStyleBackColor = true;
@@ -123,7 +126,7 @@
             this.callMethod.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.callMethod.Location = new System.Drawing.Point(0, 349);
             this.callMethod.Name = "callMethod";
-            this.callMethod.Size = new System.Drawing.Size(262, 32);
+            this.callMethod.Size = new System.Drawing.Size(261, 32);
             this.callMethod.TabIndex = 74;
             this.callMethod.Text = "Call Method";
             this.callMethod.UseVisualStyleBackColor = false;
@@ -134,15 +137,16 @@
             this.setConstant.Dock = System.Windows.Forms.DockStyle.Bottom;
             this.setConstant.Location = new System.Drawing.Point(0, 362);
             this.setConstant.Name = "setConstant";
-            this.setConstant.Size = new System.Drawing.Size(262, 20);
+            this.setConstant.Size = new System.Drawing.Size(261, 20);
             this.setConstant.TabIndex = 84;
             // 
             // addArgumentButton
             // 
             this.addArgumentButton.BackColor = System.Drawing.Color.White;
-            this.addArgumentButton.Location = new System.Drawing.Point(7, 103);
+            this.addArgumentButton.Dock = System.Windows.Forms.DockStyle.Left;
+            this.addArgumentButton.Location = new System.Drawing.Point(3, 159);
             this.addArgumentButton.Name = "addArgumentButton";
-            this.addArgumentButton.Size = new System.Drawing.Size(190, 32);
+            this.addArgumentButton.Size = new System.Drawing.Size(255, 46);
             this.addArgumentButton.TabIndex = 75;
             this.addArgumentButton.Text = "Add";
             this.addArgumentButton.UseVisualStyleBackColor = false;
@@ -151,9 +155,9 @@
             // getAllObjects
             // 
             this.getAllObjects.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.getAllObjects.Location = new System.Drawing.Point(0, 278);
+            this.getAllObjects.Location = new System.Drawing.Point(0, 311);
             this.getAllObjects.Name = "getAllObjects";
-            this.getAllObjects.Size = new System.Drawing.Size(262, 38);
+            this.getAllObjects.Size = new System.Drawing.Size(229, 38);
             this.getAllObjects.TabIndex = 83;
             this.getAllObjects.Text = "Get All Objects";
             this.getAllObjects.UseVisualStyleBackColor = true;
@@ -162,9 +166,11 @@
             // addArgsTextBox
             // 
             this.addArgsTextBox.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.addArgsTextBox.Location = new System.Drawing.Point(9, 72);
+            this.addArgsTextBox.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.addArgsTextBox.Location = new System.Drawing.Point(3, 107);
+            this.addArgsTextBox.Multiline = true;
             this.addArgsTextBox.Name = "addArgsTextBox";
-            this.addArgsTextBox.Size = new System.Drawing.Size(190, 20);
+            this.addArgsTextBox.Size = new System.Drawing.Size(314, 46);
             this.addArgsTextBox.TabIndex = 76;
             // 
             // callInstanceMethodButt
@@ -173,7 +179,7 @@
             this.callInstanceMethodButt.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.callInstanceMethodButt.Location = new System.Drawing.Point(0, 331);
             this.callInstanceMethodButt.Name = "callInstanceMethodButt";
-            this.callInstanceMethodButt.Size = new System.Drawing.Size(228, 51);
+            this.callInstanceMethodButt.Size = new System.Drawing.Size(229, 51);
             this.callInstanceMethodButt.TabIndex = 82;
             this.callInstanceMethodButt.Text = "Call Instance Method";
             this.callInstanceMethodButt.UseVisualStyleBackColor = true;
@@ -184,7 +190,7 @@
             this.testToObjects.Dock = System.Windows.Forms.DockStyle.Bottom;
             this.testToObjects.Location = new System.Drawing.Point(0, 339);
             this.testToObjects.Name = "testToObjects";
-            this.testToObjects.Size = new System.Drawing.Size(262, 23);
+            this.testToObjects.Size = new System.Drawing.Size(261, 23);
             this.testToObjects.TabIndex = 87;
             this.testToObjects.Text = "testToObjects";
             this.testToObjects.UseVisualStyleBackColor = true;
@@ -192,9 +198,10 @@
             // enteredArgsLabel
             // 
             this.enteredArgsLabel.AutoSize = true;
-            this.enteredArgsLabel.Location = new System.Drawing.Point(4, 56);
+            this.enteredArgsLabel.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.enteredArgsLabel.Location = new System.Drawing.Point(3, 52);
             this.enteredArgsLabel.Name = "enteredArgsLabel";
-            this.enteredArgsLabel.Size = new System.Drawing.Size(104, 13);
+            this.enteredArgsLabel.Size = new System.Drawing.Size(314, 52);
             this.enteredArgsLabel.TabIndex = 81;
             this.enteredArgsLabel.Text = "Entered Args = none";
             // 
@@ -203,9 +210,9 @@
             this.callConstructorButt.BackColor = System.Drawing.Color.White;
             this.callConstructorButt.Dock = System.Windows.Forms.DockStyle.Bottom;
             this.callConstructorButt.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.callConstructorButt.Location = new System.Drawing.Point(0, 349);
+            this.callConstructorButt.Location = new System.Drawing.Point(0, 279);
             this.callConstructorButt.Name = "callConstructorButt";
-            this.callConstructorButt.Size = new System.Drawing.Size(228, 32);
+            this.callConstructorButt.Size = new System.Drawing.Size(229, 32);
             this.callConstructorButt.TabIndex = 77;
             this.callConstructorButt.Text = "Call Constructor";
             this.callConstructorButt.UseVisualStyleBackColor = false;
@@ -213,9 +220,10 @@
             // 
             // clearArgsButt
             // 
-            this.clearArgsButt.Location = new System.Drawing.Point(7, 182);
+            this.clearArgsButt.Dock = System.Windows.Forms.DockStyle.Left;
+            this.clearArgsButt.Location = new System.Drawing.Point(3, 263);
             this.clearArgsButt.Name = "clearArgsButt";
-            this.clearArgsButt.Size = new System.Drawing.Size(186, 32);
+            this.clearArgsButt.Size = new System.Drawing.Size(261, 50);
             this.clearArgsButt.TabIndex = 80;
             this.clearArgsButt.Text = "Clear Arguments";
             this.clearArgsButt.UseVisualStyleBackColor = true;
@@ -227,7 +235,7 @@
             this.cb_fireAllObjects.Dock = System.Windows.Forms.DockStyle.Bottom;
             this.cb_fireAllObjects.Location = new System.Drawing.Point(0, 314);
             this.cb_fireAllObjects.Name = "cb_fireAllObjects";
-            this.cb_fireAllObjects.Size = new System.Drawing.Size(228, 17);
+            this.cb_fireAllObjects.Size = new System.Drawing.Size(229, 17);
             this.cb_fireAllObjects.TabIndex = 86;
             this.cb_fireAllObjects.Text = "Fire On All Objects";
             this.cb_fireAllObjects.UseVisualStyleBackColor = true;
@@ -235,9 +243,10 @@
             // addObjectButton
             // 
             this.addObjectButton.BackColor = System.Drawing.Color.White;
-            this.addObjectButton.Location = new System.Drawing.Point(9, 141);
+            this.addObjectButton.Dock = System.Windows.Forms.DockStyle.Left;
+            this.addObjectButton.Location = new System.Drawing.Point(3, 211);
             this.addObjectButton.Name = "addObjectButton";
-            this.addObjectButton.Size = new System.Drawing.Size(188, 35);
+            this.addObjectButton.Size = new System.Drawing.Size(255, 46);
             this.addObjectButton.TabIndex = 78;
             this.addObjectButton.Text = "Add Object";
             this.addObjectButton.UseVisualStyleBackColor = false;
@@ -258,7 +267,7 @@
             this.objectsListBox.Location = new System.Drawing.Point(0, 24);
             this.objectsListBox.Name = "objectsListBox";
             this.objectsListBox.SelectionMode = System.Windows.Forms.SelectionMode.MultiExtended;
-            this.objectsListBox.Size = new System.Drawing.Size(228, 293);
+            this.objectsListBox.Size = new System.Drawing.Size(229, 325);
             this.objectsListBox.TabIndex = 90;
             this.objectsListBox.SelectedIndexChanged += new System.EventHandler(this.objectsListBox_SelectedIndexChanged);
             // 
@@ -291,7 +300,7 @@
             this.instanceMethodListBox.Location = new System.Drawing.Point(0, 24);
             this.instanceMethodListBox.Name = "instanceMethodListBox";
             this.instanceMethodListBox.SelectionMode = System.Windows.Forms.SelectionMode.MultiExtended;
-            this.instanceMethodListBox.Size = new System.Drawing.Size(228, 290);
+            this.instanceMethodListBox.Size = new System.Drawing.Size(229, 290);
             this.instanceMethodListBox.TabIndex = 95;
             // 
             // fieldsLabel
@@ -329,7 +338,7 @@
             this.methodListBox.Location = new System.Drawing.Point(0, 24);
             this.methodListBox.Name = "methodListBox";
             this.methodListBox.SelectionMode = System.Windows.Forms.SelectionMode.MultiExtended;
-            this.methodListBox.Size = new System.Drawing.Size(262, 325);
+            this.methodListBox.Size = new System.Drawing.Size(261, 325);
             this.methodListBox.TabIndex = 100;
             this.methodListBox.SelectedIndexChanged += new System.EventHandler(this.methodListBox_SelectedIndexChanged);
             // 
@@ -439,9 +448,9 @@
             // removeObjectButt
             // 
             this.removeObjectButt.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.removeObjectButt.Location = new System.Drawing.Point(0, 317);
+            this.removeObjectButt.Location = new System.Drawing.Point(0, 349);
             this.removeObjectButt.Name = "removeObjectButt";
-            this.removeObjectButt.Size = new System.Drawing.Size(228, 32);
+            this.removeObjectButt.Size = new System.Drawing.Size(229, 32);
             this.removeObjectButt.TabIndex = 112;
             this.removeObjectButt.Text = "Remove Object";
             this.removeObjectButt.UseVisualStyleBackColor = true;
@@ -467,14 +476,15 @@
             // 
             // panel1
             // 
+            this.panel1.Controls.Add(this.callConstructorButt);
+            this.panel1.Controls.Add(this.getAllObjects);
             this.panel1.Controls.Add(this.objectsListBox);
             this.panel1.Controls.Add(this.objectsLabel);
             this.panel1.Controls.Add(this.removeObjectButt);
-            this.panel1.Controls.Add(this.callConstructorButt);
             this.panel1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panel1.Location = new System.Drawing.Point(3, 3);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(228, 381);
+            this.panel1.Size = new System.Drawing.Size(229, 381);
             this.panel1.TabIndex = 0;
             // 
             // panel2
@@ -483,9 +493,9 @@
             this.panel2.Controls.Add(this.methodListBoxLabel);
             this.panel2.Controls.Add(this.callMethod);
             this.panel2.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.panel2.Location = new System.Drawing.Point(237, 3);
+            this.panel2.Location = new System.Drawing.Point(238, 3);
             this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(262, 381);
+            this.panel2.Size = new System.Drawing.Size(261, 381);
             this.panel2.TabIndex = 1;
             // 
             // panel3
@@ -497,26 +507,43 @@
             this.panel3.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panel3.Location = new System.Drawing.Point(3, 390);
             this.panel3.Name = "panel3";
-            this.panel3.Size = new System.Drawing.Size(228, 382);
+            this.panel3.Size = new System.Drawing.Size(229, 382);
             this.panel3.TabIndex = 2;
             // 
             // panel4
             // 
-            this.panel4.Controls.Add(this.argumentsLabel);
-            this.panel4.Controls.Add(this.addArgumentButton);
-            this.panel4.Controls.Add(this.getAllObjects);
-            this.panel4.Controls.Add(this.addObjectButton);
+            this.panel4.Controls.Add(this.tableLayoutPanel2);
             this.panel4.Controls.Add(this.setConstant_Butt);
-            this.panel4.Controls.Add(this.addArgsTextBox);
             this.panel4.Controls.Add(this.testToObjects);
-            this.panel4.Controls.Add(this.clearArgsButt);
             this.panel4.Controls.Add(this.setConstant);
-            this.panel4.Controls.Add(this.enteredArgsLabel);
             this.panel4.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.panel4.Location = new System.Drawing.Point(237, 390);
+            this.panel4.Location = new System.Drawing.Point(238, 390);
             this.panel4.Name = "panel4";
-            this.panel4.Size = new System.Drawing.Size(262, 382);
+            this.panel4.Size = new System.Drawing.Size(261, 382);
             this.panel4.TabIndex = 3;
+            // 
+            // tableLayoutPanel2
+            // 
+            this.tableLayoutPanel2.ColumnCount = 1;
+            this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle());
+            this.tableLayoutPanel2.Controls.Add(this.clearArgsButt, 0, 5);
+            this.tableLayoutPanel2.Controls.Add(this.argumentsLabel, 0, 0);
+            this.tableLayoutPanel2.Controls.Add(this.addObjectButton, 0, 4);
+            this.tableLayoutPanel2.Controls.Add(this.enteredArgsLabel, 0, 1);
+            this.tableLayoutPanel2.Controls.Add(this.addArgsTextBox, 0, 2);
+            this.tableLayoutPanel2.Controls.Add(this.addArgumentButton, 0, 3);
+            this.tableLayoutPanel2.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.tableLayoutPanel2.Location = new System.Drawing.Point(0, 0);
+            this.tableLayoutPanel2.Name = "tableLayoutPanel2";
+            this.tableLayoutPanel2.RowCount = 6;
+            this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 16.66667F));
+            this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 16.66667F));
+            this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 16.66667F));
+            this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 16.66667F));
+            this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 16.66667F));
+            this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 16.66667F));
+            this.tableLayoutPanel2.Size = new System.Drawing.Size(261, 316);
+            this.tableLayoutPanel2.TabIndex = 115;
             // 
             // label1
             // 
@@ -602,6 +629,8 @@
             this.panel3.PerformLayout();
             this.panel4.ResumeLayout(false);
             this.panel4.PerformLayout();
+            this.tableLayoutPanel2.ResumeLayout(false);
+            this.tableLayoutPanel2.PerformLayout();
             this.splitContainer1.Panel1.ResumeLayout(false);
             this.splitContainer1.Panel2.ResumeLayout(false);
             this.splitContainer1.ResumeLayout(false);
@@ -661,5 +690,6 @@
         private System.Windows.Forms.SplitContainer splitContainer1;
         private System.Windows.Forms.Panel panel5;
         private System.Windows.Forms.SplitContainer splitContainer2;
+        private System.Windows.Forms.TableLayoutPanel tableLayoutPanel2;
     }
 }
