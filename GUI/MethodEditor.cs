@@ -501,14 +501,13 @@ namespace GrayStorm.GUI
 
                     if (objectFound.GetType() == typeof(foundObject))
                     {
-                        foundObject foundObj = obj as foundObject;
-                        thisObj = foundObj.targetObject;
+                         objectFound = obj as foundObject;
+                        thisObj = objectFound.targetObject;
                     }
                     else
-                        thisObj = obj;
+                        continue;
 
-
-                    TreeNode thisObjectTN = new TreeNode(thisObj.ToString());
+                    TreeNode thisObjectTN = new TreeNode(objectFound.name);
                     foundObjectsDict.Add(thisObjectTN, thisObj);
 
                     TreeNode newObject = new TreeNode("Properties");
@@ -529,8 +528,6 @@ namespace GrayStorm.GUI
                 }
             }
             catch { }
-
-           
         }
 
         private TreeNode getAllProperties(TreeNode newObject, object thisObj)
@@ -540,11 +537,11 @@ namespace GrayStorm.GUI
                 foreach (PropertyInfo prop in thisObj.GetType().GetProperties(BindingFlags.Static | BindingFlags.Public | BindingFlags.Instance | BindingFlags.NonPublic))
                 {
                     newObject.Nodes.Add(prop.ToString() + " " + getPropValue(prop, thisObj));
-                    propertiesDict.Add(newObject, prop);
+                  //  propertiesDict.Add(newObject, prop);
                 }
                 return newObject;
             }
-            catch { return newObject; }
+            catch (Exception ex) { string lol = ex.Message;  return newObject; }
         }
         private object getPropValue(PropertyInfo prop, object thisObjIN)
         {
@@ -574,7 +571,7 @@ namespace GrayStorm.GUI
                 foreach (FieldInfo field in thisObj.GetType().GetFields(BindingFlags.Static | BindingFlags.Public | BindingFlags.Instance | BindingFlags.NonPublic))
                 {
                     newObject.Nodes.Add(field.ToString() + " " + getFieldValue(field, thisObj));
-                    fieldsDict.Add(newObject, field);
+                   // fieldsDict.Add(newObject, field);
                 }
                 return newObject;
             }

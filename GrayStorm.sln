@@ -7,8 +7,6 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GrayStorm", "GrayStorm.cspr
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GrayStrap", "..\GrayStrap\GrayStrap.csproj", "{ECE64199-C052-4A92-8055-E0B3A792469E}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "GrayFrost", "GrayFrost", "{01AEE000-EA1E-4A50-B699-F623BBAED05D}"
-EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU

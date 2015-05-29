@@ -2,9 +2,11 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using GrayStorm;
 
 namespace GrayStorm.objectHunter
 {
+
     public static class heapObjects
     {
         #region init
@@ -19,7 +21,7 @@ namespace GrayStorm.objectHunter
             //see if clr is version 2 or 4
             clrVersion = Environment.Version.ToString().ElementAt(0);
 
-            object thisObject = domainTraverser.curObject;
+            object thisObject = objectsListBox.SelectedItem;
             object foundObject = null;
             IntPtr obj = IntPtr.Zero;
             IntPtr methodTable = IntPtr.Zero;
@@ -27,11 +29,11 @@ namespace GrayStorm.objectHunter
             objectsListBox.Items.Clear();
             objectsListBox.Items.Add(thisObject);
 
-            //if (thisObject.GetType() == typeof(foundObject))
-            //{
-            //    foundObject thisFoundObject = thisObject as foundObject;
-            //    thisObject = thisFoundObject.targetObject;
-            //}
+            if (thisObject.GetType() == typeof(foundObject))
+            {
+                foundObject thisFoundObject = thisObject as foundObject;
+                thisObject = thisFoundObject.targetObject;
+            }
 
             //set subAmount on stack for each clr version
             if (IntPtr.Size == 4 && clrVersion == '2')
@@ -68,8 +70,7 @@ namespace GrayStorm.objectHunter
                 methodTable = getObjectMethodTable(obj, getMethodTablex64);
                 System.Windows.Forms.MessageBox.Show("OG MEtodTable is at " + methodTable.ToString("X"));
 
-                //TODO FIX 3rd ENTRY 
-                matchedObjects = getAllObjects(obj, methodTable, getMethodTablex64, getMethodTablex64);
+                matchedObjects = getAllObjects(obj, methodTable, getMethodTablex64, get3rdEntryx64);
             }
 
 
@@ -88,7 +89,6 @@ namespace GrayStorm.objectHunter
                     // if (!lockedBySomeoneElse)
                     // {
                     //  System.Threading.Monitor.Exit(foundObject);
-                    //methodEditorGUI.intptrs.Items.Add(actualObj.ToInt64().ToString("X"));
                     foundObject objTarget = new foundObject();
                     objTarget.targetObject = foundObject;
                     objTarget.name = thisObject.ToString();
@@ -251,6 +251,9 @@ namespace GrayStorm.objectHunter
             IntPtr thirdTable = getSecondRef(firstObjectPointer);
             System.Windows.Forms.MessageBox.Show("Third entry at " + thirdTable.ToString("X"));
 
+
+
+
             //count down first until out of the heap 
             while (true)
             {
@@ -337,9 +340,11 @@ namespace GrayStorm.objectHunter
             }
             System.Windows.Forms.MessageBox.Show(testObjectLocation.ToString("X"));
 
+
             assemblyHelpers.VirtualFree(getMethodTablefuncPtr, 0, 0x8000);
             return matchedObjects;
         }
         #endregion generic
     }
+
 }
