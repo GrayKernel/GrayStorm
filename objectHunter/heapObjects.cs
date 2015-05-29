@@ -251,9 +251,6 @@ namespace GrayStorm.objectHunter
             IntPtr thirdTable = getSecondRef(firstObjectPointer);
             System.Windows.Forms.MessageBox.Show("Third entry at " + thirdTable.ToString("X"));
 
-
-
-
             //count down first until out of the heap 
             while (true)
             {
@@ -339,7 +336,6 @@ namespace GrayStorm.objectHunter
                 }
             }
             System.Windows.Forms.MessageBox.Show(testObjectLocation.ToString("X"));
-
 
             assemblyHelpers.VirtualFree(getMethodTablefuncPtr, 0, 0x8000);
             return matchedObjects;

@@ -13,7 +13,7 @@
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
-    <PlatformTarget>AnyCPU</PlatformTarget>
+    <PlatformTarget>x86</PlatformTarget>
     <DebugSymbols>true</DebugSymbols>
     <DebugType>full</DebugType>
     <Optimize>false</Optimize>
@@ -78,6 +78,7 @@
     <Compile Include="IL Disasm\ILCode.cs" />
     <Compile Include="IL Disasm\ILInstruction.cs" />
     <Compile Include="IL Disasm\ILOpCodeTranslator.cs" />
+    <Compile Include="memoryHijacking\assemblyControlFlow.cs" />
     <Compile Include="memoryHijacking\domainTraverser.cs" />
     <Compile Include="GUI\GrayStorm.cs">
       <SubType>Form</SubType>

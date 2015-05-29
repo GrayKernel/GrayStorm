@@ -40,23 +40,21 @@
             this.withINT3ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.restoreMethodToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.showILCodeToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.splitContainer1 = new System.Windows.Forms.SplitContainer();
-            this.refreshDomain_BT = new System.Windows.Forms.Button();
             this.replaceMethodWithCustomCToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.cacheReplacerMethodToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.refreshDomain_BT = new System.Windows.Forms.Button();
+            this.panel1 = new System.Windows.Forms.Panel();
             this.contextMenuStrip1.SuspendLayout();
-            this.splitContainer1.Panel1.SuspendLayout();
-            this.splitContainer1.Panel2.SuspendLayout();
-            this.splitContainer1.SuspendLayout();
+            this.panel1.SuspendLayout();
             this.SuspendLayout();
             // 
             // hierarchyViewer_TN
             // 
             this.hierarchyViewer_TN.ContextMenuStrip = this.contextMenuStrip1;
             this.hierarchyViewer_TN.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.hierarchyViewer_TN.Location = new System.Drawing.Point(0, 0);
+            this.hierarchyViewer_TN.Location = new System.Drawing.Point(0, 25);
             this.hierarchyViewer_TN.Name = "hierarchyViewer_TN";
-            this.hierarchyViewer_TN.Size = new System.Drawing.Size(291, 200);
+            this.hierarchyViewer_TN.Size = new System.Drawing.Size(291, 204);
             this.hierarchyViewer_TN.TabIndex = 0;
             this.hierarchyViewer_TN.AfterSelect += new System.Windows.Forms.TreeViewEventHandler(this.hierarchyViewer_TN_AfterSelect);
             // 
@@ -70,7 +68,7 @@
             this.replaceMethodWithCustomCToolStripMenuItem,
             this.cacheReplacerMethodToolStripMenuItem});
             this.contextMenuStrip1.Name = "contextMenuStrip1";
-            this.contextMenuStrip1.Size = new System.Drawing.Size(252, 158);
+            this.contextMenuStrip1.Size = new System.Drawing.Size(252, 136);
             // 
             // dumpAssemblyToolStripMenuItem
             // 
@@ -117,12 +115,14 @@
             this.normalToolStripMenuItem.Name = "normalToolStripMenuItem";
             this.normalToolStripMenuItem.Size = new System.Drawing.Size(130, 22);
             this.normalToolStripMenuItem.Text = "Normal";
+            this.normalToolStripMenuItem.Click += new System.EventHandler(this.normalToolStripMenuItem_Click);
             // 
             // withINT3ToolStripMenuItem
             // 
             this.withINT3ToolStripMenuItem.Name = "withINT3ToolStripMenuItem";
             this.withINT3ToolStripMenuItem.Size = new System.Drawing.Size(130, 22);
             this.withINT3ToolStripMenuItem.Text = "With INT 3";
+            this.withINT3ToolStripMenuItem.Click += new System.EventHandler(this.withINT3ToolStripMenuItem_Click);
             // 
             // restoreMethodToolStripMenuItem
             // 
@@ -138,35 +138,6 @@
             this.showILCodeToolStripMenuItem.Text = "Show IL Code";
             this.showILCodeToolStripMenuItem.Click += new System.EventHandler(this.showILCodeToolStripMenuItem_Click);
             // 
-            // splitContainer1
-            // 
-            this.splitContainer1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.splitContainer1.Location = new System.Drawing.Point(0, 0);
-            this.splitContainer1.Name = "splitContainer1";
-            this.splitContainer1.Orientation = System.Windows.Forms.Orientation.Horizontal;
-            // 
-            // splitContainer1.Panel1
-            // 
-            this.splitContainer1.Panel1.Controls.Add(this.refreshDomain_BT);
-            // 
-            // splitContainer1.Panel2
-            // 
-            this.splitContainer1.Panel2.Controls.Add(this.hierarchyViewer_TN);
-            this.splitContainer1.Size = new System.Drawing.Size(291, 229);
-            this.splitContainer1.SplitterDistance = 25;
-            this.splitContainer1.TabIndex = 1;
-            // 
-            // refreshDomain_BT
-            // 
-            this.refreshDomain_BT.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.refreshDomain_BT.Location = new System.Drawing.Point(0, 0);
-            this.refreshDomain_BT.Name = "refreshDomain_BT";
-            this.refreshDomain_BT.Size = new System.Drawing.Size(291, 25);
-            this.refreshDomain_BT.TabIndex = 0;
-            this.refreshDomain_BT.Text = "Refresh Domain";
-            this.refreshDomain_BT.UseVisualStyleBackColor = true;
-            this.refreshDomain_BT.Click += new System.EventHandler(this.refreshDomain_BT_Click);
-            // 
             // replaceMethodWithCustomCToolStripMenuItem
             // 
             this.replaceMethodWithCustomCToolStripMenuItem.Name = "replaceMethodWithCustomCToolStripMenuItem";
@@ -181,17 +152,36 @@
             this.cacheReplacerMethodToolStripMenuItem.Text = "Cache Replacer Method";
             this.cacheReplacerMethodToolStripMenuItem.Click += new System.EventHandler(this.cacheReplacerMethodToolStripMenuItem_Click);
             // 
+            // refreshDomain_BT
+            // 
+            this.refreshDomain_BT.Dock = System.Windows.Forms.DockStyle.Top;
+            this.refreshDomain_BT.Location = new System.Drawing.Point(0, 0);
+            this.refreshDomain_BT.Name = "refreshDomain_BT";
+            this.refreshDomain_BT.Size = new System.Drawing.Size(291, 25);
+            this.refreshDomain_BT.TabIndex = 0;
+            this.refreshDomain_BT.Text = "Refresh Domain";
+            this.refreshDomain_BT.UseVisualStyleBackColor = true;
+            this.refreshDomain_BT.Click += new System.EventHandler(this.refreshDomain_BT_Click);
+            // 
+            // panel1
+            // 
+            this.panel1.Controls.Add(this.hierarchyViewer_TN);
+            this.panel1.Controls.Add(this.refreshDomain_BT);
+            this.panel1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.panel1.Location = new System.Drawing.Point(0, 0);
+            this.panel1.Name = "panel1";
+            this.panel1.Size = new System.Drawing.Size(291, 229);
+            this.panel1.TabIndex = 1;
+            // 
             // hierarchyViewer
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.Controls.Add(this.splitContainer1);
+            this.Controls.Add(this.panel1);
             this.Name = "hierarchyViewer";
             this.Size = new System.Drawing.Size(291, 229);
             this.contextMenuStrip1.ResumeLayout(false);
-            this.splitContainer1.Panel1.ResumeLayout(false);
-            this.splitContainer1.Panel2.ResumeLayout(false);
-            this.splitContainer1.ResumeLayout(false);
+            this.panel1.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -199,7 +189,6 @@
         #endregion
 
         private System.Windows.Forms.TreeView hierarchyViewer_TN;
-        private System.Windows.Forms.SplitContainer splitContainer1;
         private System.Windows.Forms.Button refreshDomain_BT;
         private System.Windows.Forms.ContextMenuStrip contextMenuStrip1;
         private System.Windows.Forms.ToolStripMenuItem dumpAssemblyToolStripMenuItem;
@@ -213,5 +202,6 @@
         private System.Windows.Forms.ToolStripMenuItem showILCodeToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem replaceMethodWithCustomCToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem cacheReplacerMethodToolStripMenuItem;
+        private System.Windows.Forms.Panel panel1;
     }
 }

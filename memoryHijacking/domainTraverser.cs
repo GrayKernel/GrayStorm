@@ -36,5 +36,11 @@ namespace GrayStorm
             get;
             set;
         }
+
+        public static StorageInformation curStorage
+        {
+            set;
+            get;
+        }
     }
 }

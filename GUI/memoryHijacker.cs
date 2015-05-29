@@ -6,6 +6,7 @@ using System.Data;
 using System.Linq;
 using System.Text;
 using System.Windows.Forms;
+using System.Reflection;
 
 namespace GrayStorm
 {
@@ -26,7 +27,7 @@ namespace GrayStorm
             IntPtr trueIntPtr = IntPtr.Zero;
             Delegate targetMethodDelegate = null;
 
-            if (domainTraverser.currentMethod == null)
+            if (domainTraverser.currentMethod == null || domainTraverser.currentMethod.Name.Contains("Dispose"))
                 return;
             int containedIndex = methodHelpers.containedInList(domainTraverser.currentMethod);
             if (containedIndex == -1 || methodHelpers.StorageInformationArrayList[containedIndex].dumped != true)
@@ -102,6 +103,81 @@ namespace GrayStorm
             }
         }
 
+        private void fireMethodToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if (dynamicMethods_LB.SelectedItem != null)
+            {
+                MethodInfo customMethod = dynamicMethods_LB.SelectedItem as MethodInfo;
+                methodInvoking.fireMethod(customMethod.MethodHandle.GetFunctionPointer(), 0);
+            }
+        }
+
+        private void changeCallAddressFromCuscomC0xFFToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            IntPtr cSharpIntPtr = getAddressForFire();
+            assemblyControlFlow.replaceDwordCall(cSharpIntPtr);
+        }
+
+        private void changeCallAddressFromCuscomC0xE8ToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            IntPtr cSharpIntPtr = getAddressForFire();
+            assemblyControlFlow.replaceE8Call(cSharpIntPtr);
+        }
+
+        private void changeCallAddressFromCachedMethod0xFFToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if (hierarchyViewer.savedCachePtr == -1)
+                return;
+            assemblyControlFlow.replaceDwordCall(methodHelpers.StorageInformationArrayList[hierarchyViewer.savedCachePtr].methodIntPtr);
+        }
+
+        private void changeCallAddressFromCachedMethod0xE8ToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if (hierarchyViewer.savedCachePtr == -1)
+                return;
+            assemblyControlFlow.replaceE8Call(methodHelpers.StorageInformationArrayList[hierarchyViewer.savedCachePtr].methodIntPtr);
+        }
+
+        private void getILCustomCToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            var selectedMethod = dynamicMethods_LB.SelectedItem as MethodInfo;
+            if (selectedMethod == null)
+                return;
+            editor_RTB.Clear();
+            formatOutput formatOutput = new formatOutput();
+            foreach (ILInstruction instruciton in ILInstructionLoader.GetInstructions(selectedMethod))
+            {
+                editor_RTB.AppendText(instruciton.Offset.ToString("X4") + " " + instruciton.OpCode + " " + formatOutput.setUpDataFormat(instruciton) + "\n");
+            }
+        }
+
+
+        private void dumpAssemblyCustomCToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            var selectedMethod = dynamicMethods_LB.SelectedItem as MethodInfo;
+             methodDumping dumper = new methodDumping();
+             methodInvoking invokeMethods = new methodInvoking();
+                byte[] memory;
+                if (selectedMethod != null)
+                {
+                    System.Runtime.CompilerServices.RuntimeHelpers.PrepareMethod(selectedMethod.MethodHandle); //JIT the method! 
+                    Delegate targetMethodDelegate = invokeMethods.getMethodDelegate(domainTraverser.currentMethod); //Get the Delegate of the method.                    
+                    IntPtr trueIntPtr = invokeMethods.getIntPtrFromDelegate(targetMethodDelegate);
+                    memory = dumper.dumpAMethod(trueIntPtr);
+                    if (memory == null)
+                    {
+                        editor_RTB.AppendText(String.Format("COULD NOT READ MEMORY\n"));
+                        return;
+                    }
+                    else
+                    {
+                        foreach (byte b in memory)
+                        {
+                            editor_RTB.AppendText(String.Format("0x{0:X2}\n", b));
+                        }
+                    }
+                }
+        }
         #endregion buttons
 
         #region helpers
@@ -114,7 +190,35 @@ namespace GrayStorm
         {
             disassemble_CB.Checked = false;
         }
+
+        private IntPtr getAddressForFire()
+        {
+            var selectedMethod = dynamicMethods_LB.SelectedItem as MethodInfo;
+            if (selectedMethod == null)
+                return IntPtr.Zero;
+            IntPtr trueIntPtr = IntPtr.Zero;
+            Delegate targetMethodDelegate = null;
+            methodInvoking invokeMethods = new methodInvoking();
+            targetMethodDelegate = invokeMethods.getMethodDelegate(selectedMethod); //Get the Delegate of the method.                    
+            trueIntPtr = invokeMethods.getIntPtrFromDelegate(targetMethodDelegate);
+            return trueIntPtr;
+        }
         #endregion helpers
+
+
+       
+
+     
+    
+
+        
+
+     
+
+    
+
+       
+      
     }
 }
 

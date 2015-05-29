@@ -18,11 +18,18 @@ namespace GrayStorm.GUI
             InitializeComponent();
         }
 
+        System.Collections.Generic.Dictionary<TreeNode, object> foundObjectsDict = new Dictionary<TreeNode, object>();
+        System.Collections.Generic.Dictionary<TreeNode, FieldInfo> fieldsDict = new Dictionary<TreeNode, FieldInfo>();
+        System.Collections.Generic.Dictionary<TreeNode, PropertyInfo> propertiesDict = new Dictionary<TreeNode, PropertyInfo>();
+
         #region buttons
 
         ArrayList methodArgs = new ArrayList();
         FieldInfo[] fields;
         PropertyInfo[] properties;
+        string properyInfoString;
+        string fieldInfoString;
+
         private void addArgumentButton_Click(object sender, EventArgs e)
         {
             string s = null;
@@ -206,21 +213,20 @@ namespace GrayStorm.GUI
         {
             try
             {
-                if (propertiesListBox.SelectedItem != null)
+                if (properyInfoString != null)
                 {
                     object x = 0;
 
                     Type myType = domainTraverser.curObject.GetType();
-                    string propertyName = propertiesListBox.SelectedItem.ToString();
-                    propertyName = propertyName.Substring(propertyName.IndexOf(" ") + 1);
+                    string curProperyInfoString = propertiesListBox.SelectedItem.ToString();
+                    curProperyInfoString = properyInfoString.Substring(properyInfoString.IndexOf(" ") + 1);
 
-                    PropertyInfo info = domainTraverser.curObject.GetType().GetProperty(propertyName);
-                    string stringType = propertiesListBox.SelectedItem.ToString();
+                    PropertyInfo info = domainTraverser.curObject.GetType().GetProperty(curProperyInfoString);
+                    string stringType = propertiesListBox.SelectedItem.ToString(); 
                     stringType = stringType.Substring(0, stringType.LastIndexOf(" ")).Trim();
 
                     x = parseObject(stringType.GetType(), propertyValueTextBox.Text);
                     info.SetValue(domainTraverser.curObject, x, null);
-                    propertiesListBox_SelectedIndexChanged(null, null);
                 }
             }
             catch (Exception f)
@@ -233,7 +239,7 @@ namespace GrayStorm.GUI
         {
             try
             {
-                if (fieldsListBox.SelectedItem != null)
+                if (fieldInfoString != null)
                 {
                     object x = 0;
 
@@ -242,7 +248,7 @@ namespace GrayStorm.GUI
                     fieldName = fieldName.Substring(fieldName.IndexOf(" ") + 1);
 
                     FieldInfo info = domainTraverser.curObject.GetType().GetField(fieldName);
-                    string stringType = fieldsListBox.SelectedItem.ToString();
+                    string stringType = fieldsListBox.SelectedItem.ToString(); ;
                     stringType = stringType.Substring(0, stringType.LastIndexOf(" ")).Trim();
 
                     object ob = fieldValueTextBox.Text;
@@ -260,9 +266,11 @@ namespace GrayStorm.GUI
         private void getAllObjects_Click(object sender, EventArgs e)
         {
             if (domainTraverser.curObject != null)
+            {
                 objectHunter.heapObjects.getAddresses(objectsListBox);
-
-            changeObjTree();
+                changeObjTree();
+            }
+           
         }
 
         private void callInstanceMethodButt_Click(object sender, EventArgs e)
@@ -477,16 +485,12 @@ namespace GrayStorm.GUI
             methodArgs.Clear();
         }
 
-
         private void changeObjTree()
         {
             try
             {
                 objTreeView.Nodes.Clear();
                 object thisObj = null;
-
-
-                // object obj = objectsListBox.SelectedItem;
 
                 foreach (object obj in objectsListBox.Items)
                 {
@@ -503,29 +507,30 @@ namespace GrayStorm.GUI
                     else
                         thisObj = obj;
 
-                    TreeNode thisObject = new TreeNode(thisObj.ToString());
-                    FieldInfo[] fields = thisObj.GetType().GetFields((BindingFlags.Static | BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Instance) ^ (BindingFlags.GetProperty));//fields good properties bad
+
+                    TreeNode thisObjectTN = new TreeNode(thisObj.ToString());
+                    foundObjectsDict.Add(thisObjectTN, thisObj);
 
                     TreeNode newObject = new TreeNode("Properties");
                     newObject = getAllProperties(newObject, thisObj);
-                    thisObject.Nodes.Add(newObject);
+                    thisObjectTN.Nodes.Add(newObject);
 
                     newObject = new TreeNode("Fields");
                     newObject = getAllFields(newObject, thisObj);
+                    thisObjectTN.Nodes.Add(newObject);
 
-                    thisObject.Nodes.Add(newObject);
-                    //handle errors for getting each field! 
-                    //foreach (FieldInfo field in fields)
-                    //{
-
-                    //    newObject.Nodes.Add(field.ToString() + " " + getValue(field, thisObj));
-                    //}
-
-                    objTreeView.Nodes.Add(thisObject);
+                    objTreeView.Nodes.Add(thisObjectTN);
                 }
-                // objTreeView.ExpandAll();
+
+                objectsListBox.Items.Clear();
+                foreach (KeyValuePair<TreeNode, object> entry in foundObjectsDict)
+                {
+                    objectsListBox.Items.Add(entry.Value);
+                }
             }
             catch { }
+
+           
         }
 
         private TreeNode getAllProperties(TreeNode newObject, object thisObj)
@@ -535,6 +540,7 @@ namespace GrayStorm.GUI
                 foreach (PropertyInfo prop in thisObj.GetType().GetProperties(BindingFlags.Static | BindingFlags.Public | BindingFlags.Instance | BindingFlags.NonPublic))
                 {
                     newObject.Nodes.Add(prop.ToString() + " " + getPropValue(prop, thisObj));
+                    propertiesDict.Add(newObject, prop);
                 }
                 return newObject;
             }
@@ -567,8 +573,8 @@ namespace GrayStorm.GUI
             {
                 foreach (FieldInfo field in thisObj.GetType().GetFields(BindingFlags.Static | BindingFlags.Public | BindingFlags.Instance | BindingFlags.NonPublic))
                 {
-
                     newObject.Nodes.Add(field.ToString() + " " + getFieldValue(field, thisObj));
+                    fieldsDict.Add(newObject, field);
                 }
                 return newObject;
             }
@@ -598,7 +604,54 @@ namespace GrayStorm.GUI
 
         #endregion helperMethods
 
-      
+        #region treeNode
+        private void objTreeView_AfterSelect(object sender, TreeViewEventArgs e)
+        {
+            TreeNode theSelectedNode = objTreeView.SelectedNode;
+            if (foundObjectsDict.ContainsKey(theSelectedNode))
+            {
+                domainTraverser.curObject = foundObjectsDict[theSelectedNode];
+
+                fieldsListBox.Items.Clear();
+                instanceMethodListBox.Items.Clear();
+                propertiesListBox.Items.Clear();
+
+                try
+                {
+                    foundObject objectFound = domainTraverser.curObject as foundObject;
+                    if (objectFound != null)
+                    {
+                        setConstant.Text = objectFound.addrOfObj.ToString("X");
+                        domainTraverser.curObject = objectFound.targetObject;
+                    }
+
+                    if (domainTraverser.curObject != null)
+                    {
+                        MethodInfo[] instanceMethods = domainTraverser.curObject.GetType().GetMethods(BindingFlags.Instance | BindingFlags.Public | BindingFlags.NonPublic);
+                        instanceMethodListBox.Items.AddRange(instanceMethods);
+
+                        fields = domainTraverser.curObject.GetType().GetFields(BindingFlags.Static | BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Instance);
+                        fieldsListBox.Items.AddRange(fields);
+
+                        properties = domainTraverser.curObject.GetType().GetProperties(BindingFlags.Static | BindingFlags.Public | BindingFlags.Instance | BindingFlags.NonPublic);
+                        propertiesListBox.Items.AddRange(properties);
+                    }
+                }
+                catch (Exception) { }
+            }
+            else if (propertiesDict.ContainsKey(theSelectedNode))
+            {
+               properyInfoString = propertiesDict[theSelectedNode].ToString();
+            }
+            else if(fieldsDict.ContainsKey(theSelectedNode))
+            {
+                fieldInfoString = fieldsDict[theSelectedNode].ToString();
+            }
+        }
+
+        #endregion treeNode
+
+
 
 
     }

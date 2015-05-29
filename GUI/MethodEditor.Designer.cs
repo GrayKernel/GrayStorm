@@ -259,6 +259,7 @@
             this.objTreeView.Name = "objTreeView";
             this.objTreeView.Size = new System.Drawing.Size(174, 680);
             this.objTreeView.TabIndex = 89;
+            this.objTreeView.AfterSelect += new System.Windows.Forms.TreeViewEventHandler(this.objTreeView_AfterSelect);
             // 
             // objectsListBox
             // 

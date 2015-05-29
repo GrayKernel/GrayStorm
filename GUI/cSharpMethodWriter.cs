@@ -48,7 +48,9 @@ namespace GrayStorm
                 catch (NotSupportedException)
                 {
                     //  this happens for dynamic assemblies, so just ignore it. 
+
                 }
+            }
 
                 CompilerResults results = provider.CompileAssemblyFromSource(parameters, cSharpCode_RTB.Text);
                 errs_RTB.Clear();
@@ -87,7 +89,7 @@ namespace GrayStorm
                     grayStorm._memoryHijacker.dynamicMethods_LB.Items.Clear();
                     grayStorm._memoryHijacker.dynamicMethods_LB.Items.AddRange(dynamicC.userCreatedMethods.userCreatedMethodsList.ToArray());
                     grayStorm._memoryHijacker.dynamicMethods_LB.Refresh();
-                }
+                
             }
         }
 

@@ -129,7 +129,7 @@ namespace GrayStorm
             {
                 var classSelected = domainClasses[parent];
 
-                MethodInfo[] methodInfo = classSelected.GetMethods(BindingFlags.NonPublic | BindingFlags.Static | BindingFlags.Instance | BindingFlags.Public | BindingFlags.DeclaredOnly | BindingFlags.FlattenHierarchy);
+                MethodInfo[] methodInfo = classSelected.GetMethods(BindingFlags.NonPublic | BindingFlags.Static | BindingFlags.Instance | BindingFlags.Public | BindingFlags.DeclaredOnly);
                 ConstructorInfo[] constructorList = classSelected.GetConstructors(BindingFlags.Instance | BindingFlags.Public | BindingFlags.NonPublic);
 
                 foreach (MethodInfo classMethods in methodInfo)
@@ -199,10 +199,11 @@ namespace GrayStorm
             MethodInfo replacement = grayStorm._memoryHijacker.dynamicMethods_LB.SelectedItem as MethodInfo;
             if (replacement == null || domainTraverser.currentMethod == null)
                 return;
+            System.Windows.Forms.MessageBox.Show("Replacing with " + replacement.Name);
             dynamic_C.methodReplacer.replaceIL(domainTraverser.currentMethod, replacement);
         }
 
-        int savedCachePtr = -1;
+        public static int savedCachePtr = -1;
         private void cacheReplacerMethodToolStripMenuItem_Click(object sender, EventArgs e)
         {
             int containedIndex = getContainedIndex();
@@ -221,7 +222,37 @@ namespace GrayStorm
             else return -1;
         }
 
+        private void normalToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            int containedIndex = getContainedIndex();
+            if (containedIndex >= 0)
+            {
+                methodInvoking.fireMethod(methodHelpers.StorageInformationArrayList[containedIndex].methodIntPtr, 0);
+            }
+            else
+            {
+                grayStorm._memoryHijacker.dumpAsm_BT_Click(null, null);
+                normalToolStripMenuItem_Click(null, null);
+            }
+        }
+
+        private void withINT3ToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            int containedIndex = getContainedIndex();
+            if (containedIndex >= 0)
+            {
+                methodInvoking.fireMethod(methodHelpers.StorageInformationArrayList[containedIndex].methodIntPtr, 1);
+            }
+            else
+            {
+                grayStorm._memoryHijacker.dumpAsm_BT_Click(null, null);
+                withINT3ToolStripMenuItem_Click(null, null);
+            }
+        }
+
         #endregion rightClickMenu
+
+       
     }
 }
     
