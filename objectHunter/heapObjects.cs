@@ -6,7 +6,6 @@ using GrayStorm;
 
 namespace GrayStorm.objectHunter
 {
-
     public static class heapObjects
     {
         #region init
@@ -52,8 +51,8 @@ namespace GrayStorm.objectHunter
                 methodTable = getObjectMethodTable(obj, getMethodTablex86);
 
                 if (methodTable == IntPtr.Zero)
-                    return;
-
+                    return
+;
                 Console.WriteLine("OG Object is at " + obj.ToString("X"));
                 Console.WriteLine("method table is at " + methodTable.ToString("X"));
 
@@ -115,11 +114,11 @@ namespace GrayStorm.objectHunter
             IntPtr objectPointer = IntPtr.Zero;
             unsafe
             {
-                // System.Windows.Forms.MessageBox.Show("Address of objectPointer:" + (uint)(&objectPointer) + " " + *(&objectPointer));
+                //System.Windows.Forms.MessageBox.Show("Address of objectPointer:" + (uint)(&objectPointer) + " " + *(&objectPointer));
                 //System.Windows.Forms.MessageBox.Show("Address of refer:" + (uint)(&objectPointer- 3) + " " + *(&objectPointer - 3));
-                objectPointer = *(&objectPointer - 3);
+                return *(&objectPointer - 3);
             }
-            return objectPointer;
+           // return objectPointer;
         }
 
         static public byte[] getMethodTablex86 = new byte[] 
@@ -141,7 +140,7 @@ namespace GrayStorm.objectHunter
 
             unsafe
             {
-                (*(&pointer - clrSub)) = *(&pointer); //move the pointer of our object into the actual object on the stack! This tricks the Framework to think that "object" was declared here! 
+                *(&pointer - clrSub) = *(&pointer); //move the pointer of our object into the actual object on the stack! This tricks the Framework to think that "object" was declared here! 
             }
             //System.Windows.Forms.MessageBox.Show(refer.ToString());
             return refer;
@@ -280,6 +279,7 @@ namespace GrayStorm.objectHunter
                             matchedObjects.Add(testObjectLocation);
 
                             Console.WriteLine("Object is at " + testObjectLocation.ToString("X"));
+                            err = 0;
                         }
                     }
 
@@ -324,6 +324,7 @@ namespace GrayStorm.objectHunter
                             matchedObjects.Add(testObjectLocation);
 
                             Console.WriteLine("Object is at " + testObjectLocation.ToString("X"));
+                            err = 0;
                         }
                     }
                 }
@@ -346,5 +347,4 @@ namespace GrayStorm.objectHunter
         }
         #endregion generic
     }
-
 }

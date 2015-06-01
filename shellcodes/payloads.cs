@@ -22,6 +22,8 @@ namespace GrayStorm.shellcodes
             {
                 payloads.Add(new dataBox("message box 64bit Topher", test64BitMessageBox, 0));
                 payloads.Add(new dataBox("test dat hook", SixtyFourbitHookTest, 148));
+                 payloads.Add(new dataBox("Return True", returnTrue64, 0));
+                 payloads.Add(new dataBox("Return False", returnFalse64, 0));
             }
             return payloads;
         }
@@ -46,12 +48,8 @@ namespace GrayStorm.shellcodes
         static public byte[] returnTrue = new byte[]
         {
                
-                  0x60,              //popad
                   0x31, 0xc0,       //xor eax, eax &
                   0x40,             //inc eax
-                  0x89, 0x44, 0x24, //mov eax X
-                  0x1c, 
-                  0x61, //pushad
                   0xc3  //ret
 
         };
@@ -205,6 +203,19 @@ namespace GrayStorm.shellcodes
             0x01, 0xeb, 0x31, 0xc9, 0x66, 0x67, 0x42, 0x8b, 0x0c, 0x53, 0x67, 0x41,
             0x8b, 0x5e, 0x1c, 0x44, 0x01, 0xeb, 0x67, 0x8b, 0x04, 0x8b, 0x44, 0x01,
             0xe8, 0xc3
+        };
+
+        static public byte[] returnTrue64 = new byte[]
+        {
+             0x48, 0x31, 0xc0,       //xor rax, rax
+             0x48, 0x83, 0xc0, 0x01, //add rax, 1
+             0xc3                    //ret
+        };
+
+        static public byte[] returnFalse64 = new byte[]
+        {
+              0x48, 0x31, 0xc0, //xor rax, rax
+              0xc3              //ret
         };
 
         static public byte[] SixtyFourbitHookTest = new byte[]

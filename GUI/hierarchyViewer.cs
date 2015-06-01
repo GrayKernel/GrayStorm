@@ -28,13 +28,15 @@ namespace GrayStorm
         {
             domainTraverser.currentMethod = targetMethod;
             GrayStorm.grayStorm._methodLabel_TB.Text = TN.Parent.Text + "." + targetMethod.Name;
-
+            grayStorm._addrOfMethod_TB.Text = "";
         }
 
         void hierarchyViewer_selectedConstructor(ConstructorInfo targetConstructor, TreeNode TN)
         {
             domainTraverser.currentConstructor = targetConstructor;
             GrayStorm.grayStorm._constructorLabel_TB.Text = TN.Parent.Text + "." + TN.Text;
+            System.Runtime.CompilerServices.RuntimeHelpers.PrepareMethod(targetConstructor.MethodHandle);
+            grayStorm._addrOfConstructor_TB.Text = targetConstructor.MethodHandle.GetFunctionPointer().ToString("X");
         }
 
         private void refreshDomain_BT_Click(object sender, EventArgs e)
@@ -90,14 +92,15 @@ namespace GrayStorm
                 {
                     Assembly assemblySelected = domainAssemblies[theSelectedNode];
                     
-
                     Type[] types = assemblySelected.GetTypes();
                     foreach (Type type in types)
                     {
                         System.Windows.Forms.TreeNode asmClass = new TreeNode(type.ToString());
+                        if (!domainClasses.ContainsKey(asmClass))
+                            makeMethodandFunctionList(asmClass, type);
                         domainClasses.Add(asmClass, type);
                         theSelectedNode.Nodes.Add(asmClass);
-                        makeMethodandFunctionList(asmClass);
+                      
                     }
                     hierarchyViewer_TN.Sort();
                 }
@@ -115,6 +118,7 @@ namespace GrayStorm
                     Assembly assemblySelected = domainAssemblies[theSelectedNode.Parent.Parent];
                     domainTraverser.assemblyInfo = assemblySelected;
                     domainTraverser.typeInfo = assemblySelected.GetType(theSelectedNode.Parent.Text);
+                  
 
 
                     if (selectedConstructor != null && constructorSelected != null)
@@ -123,12 +127,10 @@ namespace GrayStorm
             }
         }
 
-        private void makeMethodandFunctionList(TreeNode parent)
+        private void makeMethodandFunctionList(TreeNode parent, Type classSelected)
         {
             try
             {
-                var classSelected = domainClasses[parent];
-
                 MethodInfo[] methodInfo = classSelected.GetMethods(BindingFlags.NonPublic | BindingFlags.Static | BindingFlags.Instance | BindingFlags.Public | BindingFlags.DeclaredOnly);
                 ConstructorInfo[] constructorList = classSelected.GetConstructors(BindingFlags.Instance | BindingFlags.Public | BindingFlags.NonPublic);
 

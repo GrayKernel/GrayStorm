@@ -37,7 +37,7 @@ namespace GrayStorm
                 if (containedIndex != -1)
                 {
                     memory = dumper.dumpAMethod(methodHelpers.StorageInformationArrayList[containedIndex].methodIntPtr);
-                    realAddress_TB.Text = methodHelpers.StorageInformationArrayList[containedIndex].methodIntPtr.ToString("X");
+                    grayStorm._addrOfMethod_TB.Text = methodHelpers.StorageInformationArrayList[containedIndex].methodIntPtr.ToString("X");
                     if (memory == null)
                     {
                         editor_RTB.AppendText(String.Format("COULD NOT READ MEMORY\n"));
@@ -53,6 +53,7 @@ namespace GrayStorm
                 {
                     methodInvoking invokeMethods = new methodInvoking();
                     System.Runtime.CompilerServices.RuntimeHelpers.PrepareMethod(domainTraverser.currentMethod.MethodHandle); //JIT the method! 
+                    grayStorm._addrOfMethod_TB.Text = domainTraverser.currentMethod.MethodHandle.GetFunctionPointer().ToString("X");
                     targetMethodDelegate = invokeMethods.getMethodDelegate(domainTraverser.currentMethod); //Get the Delegate of the method.                    
                     trueIntPtr = invokeMethods.getIntPtrFromDelegate(targetMethodDelegate);
                     memory = dumper.dumpAMethod(trueIntPtr);
@@ -72,7 +73,7 @@ namespace GrayStorm
                         currentMethod.methodDelegate = targetMethodDelegate;
                         methodHelpers.StorageInformationArrayList.Add(currentMethod);
                         containedIndex = methodHelpers.StorageInformationArrayList.Count - 1;
-                        realAddress_TB.Text = methodHelpers.StorageInformationArrayList[containedIndex].methodIntPtr.ToString("X");
+                        grayStorm._addrOfMethod_TB.Text = methodHelpers.StorageInformationArrayList[containedIndex].methodIntPtr.ToString("X");
                     }
                 }
             }

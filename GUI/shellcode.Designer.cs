@@ -185,7 +185,7 @@
             // 
             this.fireShellcode_BT.Location = new System.Drawing.Point(3, 217);
             this.fireShellcode_BT.Name = "fireShellcode_BT";
-            this.fireShellcode_BT.Size = new System.Drawing.Size(277, 23);
+            this.fireShellcode_BT.Size = new System.Drawing.Size(210, 23);
             this.fireShellcode_BT.TabIndex = 4;
             this.fireShellcode_BT.Text = "Fire Shellcode";
             this.fireShellcode_BT.UseVisualStyleBackColor = true;
@@ -195,7 +195,7 @@
             // 
             this.restoreCode_BT.Location = new System.Drawing.Point(3, 246);
             this.restoreCode_BT.Name = "restoreCode_BT";
-            this.restoreCode_BT.Size = new System.Drawing.Size(277, 27);
+            this.restoreCode_BT.Size = new System.Drawing.Size(213, 27);
             this.restoreCode_BT.TabIndex = 5;
             this.restoreCode_BT.Text = "Restore Code";
             this.restoreCode_BT.UseVisualStyleBackColor = true;
@@ -225,13 +225,12 @@
             // 
             // panel3
             // 
-            this.panel3.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
             this.panel3.Controls.Add(this.shellcode_RTB);
             this.panel3.Controls.Add(this.disassemble_CB);
+            this.panel3.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panel3.Location = new System.Drawing.Point(3, 3);
             this.panel3.Name = "panel3";
-            this.panel3.Size = new System.Drawing.Size(553, 440);
+            this.panel3.Size = new System.Drawing.Size(420, 369);
             this.panel3.TabIndex = 8;
             // 
             // shellcode_RTB
@@ -239,7 +238,7 @@
             this.shellcode_RTB.Dock = System.Windows.Forms.DockStyle.Fill;
             this.shellcode_RTB.Location = new System.Drawing.Point(0, 0);
             this.shellcode_RTB.Name = "shellcode_RTB";
-            this.shellcode_RTB.Size = new System.Drawing.Size(553, 423);
+            this.shellcode_RTB.Size = new System.Drawing.Size(420, 352);
             this.shellcode_RTB.TabIndex = 0;
             this.shellcode_RTB.Text = "";
             // 
@@ -247,9 +246,9 @@
             // 
             this.disassemble_CB.AutoSize = true;
             this.disassemble_CB.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.disassemble_CB.Location = new System.Drawing.Point(0, 423);
+            this.disassemble_CB.Location = new System.Drawing.Point(0, 352);
             this.disassemble_CB.Name = "disassemble_CB";
-            this.disassemble_CB.Size = new System.Drawing.Size(553, 17);
+            this.disassemble_CB.Size = new System.Drawing.Size(420, 17);
             this.disassemble_CB.TabIndex = 7;
             this.disassemble_CB.Text = "disassemble";
             this.disassemble_CB.UseVisualStyleBackColor = true;

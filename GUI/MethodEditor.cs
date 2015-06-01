@@ -204,7 +204,7 @@ namespace GrayStorm.GUI
                 }
                 catch
                 {
-                    fieldValuePlacerholder.Text = "Cannot eval field";
+                    propertyValuePlaceholder.Text = "Cannot eval field";
                 }
             }
         }
@@ -217,7 +217,6 @@ namespace GrayStorm.GUI
                 {
                     object x = 0;
 
-                    Type myType = domainTraverser.curObject.GetType();
                     string curProperyInfoString = propertiesListBox.SelectedItem.ToString();
                     curProperyInfoString = properyInfoString.Substring(properyInfoString.IndexOf(" ") + 1);
 
@@ -243,7 +242,6 @@ namespace GrayStorm.GUI
                 {
                     object x = 0;
 
-                    Type myType = domainTraverser.curObject.GetType();
                     string fieldName = fieldsListBox.SelectedItem.ToString();
                     fieldName = fieldName.Substring(fieldName.IndexOf(" ") + 1);
 
@@ -254,7 +252,6 @@ namespace GrayStorm.GUI
                     object ob = fieldValueTextBox.Text;
                     x = parseObject(stringType.GetType(), fieldValueTextBox.Text);
                     info.SetValue(domainTraverser.curObject, x);
-                    fieldsListBox_SelectedIndexChanged(null, null);
                 }
             }
             catch (Exception f)
@@ -268,9 +265,9 @@ namespace GrayStorm.GUI
             if (domainTraverser.curObject != null)
             {
                 objectHunter.heapObjects.getAddresses(objectsListBox);
-                changeObjTree();
+                if(objectsListBox.Items.Count < 10)
+                    changeObjTree();
             }
-           
         }
 
         private void callInstanceMethodButt_Click(object sender, EventArgs e)
@@ -429,13 +426,14 @@ namespace GrayStorm.GUI
         {
             addArgsTextBox.Text = "Click new constructor or method.";
             object[] argObjects = new object[methodArgs.Count];
-            if (argObjects.Length != domainTraverser.currentConstructor.GetParameters().Length)
+            if (argObjects.Length != methodToCall.Method.GetParameters().Length)
             {
-                System.Windows.Forms.MessageBox.Show("Wrong arguments");
+                System.Windows.Forms.MessageBox.Show("Not enough arguments");
                 methodArgs.Clear();
                 enteredArgsLabel.Text = "Entered Args";
                 return;
             }
+
             string stringType = "";
             int i = 0;
             ParameterInfo[] instancePars = methodToCall.Method.GetParameters();
@@ -450,7 +448,7 @@ namespace GrayStorm.GUI
                     }
                     catch (Exception Exception)
                     {
-                        System.Windows.Forms.MessageBox.Show("Constructor err: " + Exception.Message);
+                        System.Windows.Forms.MessageBox.Show("err: " + Exception.Message);
                         clearArgsButt_Click(null, null);
                         return;
                     }
@@ -499,13 +497,7 @@ namespace GrayStorm.GUI
                     if (objectFound == null)
                         continue;
 
-                    if (objectFound.GetType() == typeof(foundObject))
-                    {
-                         objectFound = obj as foundObject;
-                        thisObj = objectFound.targetObject;
-                    }
-                    else
-                        continue;
+                    thisObj = objectFound.targetObject;
 
                     TreeNode thisObjectTN = new TreeNode(objectFound.name);
                     foundObjectsDict.Add(thisObjectTN, thisObj);

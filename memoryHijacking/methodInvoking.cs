@@ -27,7 +27,7 @@ namespace GrayStorm
         {
             try
             {
-                return (IntPtr)targetIN.Method.MethodHandle.GetFunctionPointer().ToInt64();
+                return targetIN.Method.MethodHandle.GetFunctionPointer();
             }
             catch { return IntPtr.Zero; }
         }

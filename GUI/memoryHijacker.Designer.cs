@@ -30,6 +30,12 @@
         {
             this.components = new System.ComponentModel.Container();
             this.editor_RTB = new System.Windows.Forms.RichTextBox();
+            this.assmblyControlFlow = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.changeCallAddressFromCuscomC0xFFToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.changeCallAddressFromCuscomC0xE8ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.changeCallAddressFromCachedMethod0xFFToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.changeCallAddressFromCachedMethod0xE8ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.changeCallAddressFromSelectedMethodToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.dumpAsm_BT = new System.Windows.Forms.Button();
             this.getIL_BT = new System.Windows.Forms.Button();
             this.disassemble_CB = new System.Windows.Forms.CheckBox();
@@ -38,20 +44,13 @@
             this.dynamicControl = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.fireMethodToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.replaceMethodWithCustomCToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.realAddress_TB = new System.Windows.Forms.TextBox();
-            this.assmblyControlFlow = new System.Windows.Forms.ContextMenuStrip(this.components);
-            this.changeCallAddressFromCuscomC0xFFToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.changeCallAddressFromCuscomC0xE8ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.changeCallAddressFromCachedMethod0xFFToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.changeCallAddressFromCachedMethod0xE8ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.changeCallAddressFromSelectedMethodToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.getILCustomCToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.dumpAssemblyCustomCToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.assmblyControlFlow.SuspendLayout();
             this.splitContainer1.Panel1.SuspendLayout();
             this.splitContainer1.Panel2.SuspendLayout();
             this.splitContainer1.SuspendLayout();
             this.dynamicControl.SuspendLayout();
-            this.assmblyControlFlow.SuspendLayout();
             this.SuspendLayout();
             // 
             // editor_RTB
@@ -63,96 +62,6 @@
             this.editor_RTB.Size = new System.Drawing.Size(356, 391);
             this.editor_RTB.TabIndex = 0;
             this.editor_RTB.Text = "";
-            // 
-            // dumpAsm_BT
-            // 
-            this.dumpAsm_BT.Location = new System.Drawing.Point(0, 28);
-            this.dumpAsm_BT.Name = "dumpAsm_BT";
-            this.dumpAsm_BT.Size = new System.Drawing.Size(180, 38);
-            this.dumpAsm_BT.TabIndex = 1;
-            this.dumpAsm_BT.Text = "Dump Assembly";
-            this.dumpAsm_BT.UseVisualStyleBackColor = true;
-            this.dumpAsm_BT.Click += new System.EventHandler(this.dumpAsm_BT_Click);
-            // 
-            // getIL_BT
-            // 
-            this.getIL_BT.Location = new System.Drawing.Point(-3, 95);
-            this.getIL_BT.Name = "getIL_BT";
-            this.getIL_BT.Size = new System.Drawing.Size(178, 32);
-            this.getIL_BT.TabIndex = 2;
-            this.getIL_BT.Text = "Get IL Code";
-            this.getIL_BT.UseVisualStyleBackColor = true;
-            this.getIL_BT.Click += new System.EventHandler(this.getIL_BT_Click);
-            // 
-            // disassemble_CB
-            // 
-            this.disassemble_CB.AutoSize = true;
-            this.disassemble_CB.Location = new System.Drawing.Point(3, 72);
-            this.disassemble_CB.Name = "disassemble_CB";
-            this.disassemble_CB.Size = new System.Drawing.Size(83, 17);
-            this.disassemble_CB.TabIndex = 3;
-            this.disassemble_CB.Text = "disassemble";
-            this.disassemble_CB.UseVisualStyleBackColor = true;
-            // 
-            // splitContainer1
-            // 
-            this.splitContainer1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.splitContainer1.Location = new System.Drawing.Point(0, 0);
-            this.splitContainer1.Name = "splitContainer1";
-            // 
-            // splitContainer1.Panel1
-            // 
-            this.splitContainer1.Panel1.Controls.Add(this.dynamicMethods_LB);
-            this.splitContainer1.Panel1.Controls.Add(this.realAddress_TB);
-            this.splitContainer1.Panel1.Controls.Add(this.getIL_BT);
-            this.splitContainer1.Panel1.Controls.Add(this.disassemble_CB);
-            this.splitContainer1.Panel1.Controls.Add(this.dumpAsm_BT);
-            // 
-            // splitContainer1.Panel2
-            // 
-            this.splitContainer1.Panel2.Controls.Add(this.editor_RTB);
-            this.splitContainer1.Size = new System.Drawing.Size(540, 391);
-            this.splitContainer1.SplitterDistance = 180;
-            this.splitContainer1.TabIndex = 5;
-            // 
-            // dynamicMethods_LB
-            // 
-            this.dynamicMethods_LB.ContextMenuStrip = this.dynamicControl;
-            this.dynamicMethods_LB.FormattingEnabled = true;
-            this.dynamicMethods_LB.Location = new System.Drawing.Point(3, 230);
-            this.dynamicMethods_LB.Name = "dynamicMethods_LB";
-            this.dynamicMethods_LB.Size = new System.Drawing.Size(172, 147);
-            this.dynamicMethods_LB.TabIndex = 5;
-            // 
-            // dynamicControl
-            // 
-            this.dynamicControl.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.fireMethodToolStripMenuItem,
-            this.replaceMethodWithCustomCToolStripMenuItem,
-            this.getILCustomCToolStripMenuItem,
-            this.dumpAssemblyCustomCToolStripMenuItem});
-            this.dynamicControl.Name = "contextMenuStrip1";
-            this.dynamicControl.Size = new System.Drawing.Size(250, 114);
-            // 
-            // fireMethodToolStripMenuItem
-            // 
-            this.fireMethodToolStripMenuItem.Name = "fireMethodToolStripMenuItem";
-            this.fireMethodToolStripMenuItem.Size = new System.Drawing.Size(249, 22);
-            this.fireMethodToolStripMenuItem.Text = "Fire Method";
-            this.fireMethodToolStripMenuItem.Click += new System.EventHandler(this.fireMethodToolStripMenuItem_Click);
-            // 
-            // replaceMethodWithCustomCToolStripMenuItem
-            // 
-            this.replaceMethodWithCustomCToolStripMenuItem.Name = "replaceMethodWithCustomCToolStripMenuItem";
-            this.replaceMethodWithCustomCToolStripMenuItem.Size = new System.Drawing.Size(249, 22);
-            this.replaceMethodWithCustomCToolStripMenuItem.Text = "Replace Method with Custom C#";
-            // 
-            // realAddress_TB
-            // 
-            this.realAddress_TB.Location = new System.Drawing.Point(13, 173);
-            this.realAddress_TB.Name = "realAddress_TB";
-            this.realAddress_TB.Size = new System.Drawing.Size(146, 20);
-            this.realAddress_TB.TabIndex = 4;
             // 
             // assmblyControlFlow
             // 
@@ -198,6 +107,88 @@
             this.changeCallAddressFromSelectedMethodToolStripMenuItem.Name = "changeCallAddressFromSelectedMethodToolStripMenuItem";
             this.changeCallAddressFromSelectedMethodToolStripMenuItem.Size = new System.Drawing.Size(338, 22);
             // 
+            // dumpAsm_BT
+            // 
+            this.dumpAsm_BT.Location = new System.Drawing.Point(3, 28);
+            this.dumpAsm_BT.Name = "dumpAsm_BT";
+            this.dumpAsm_BT.Size = new System.Drawing.Size(177, 38);
+            this.dumpAsm_BT.TabIndex = 1;
+            this.dumpAsm_BT.Text = "Dump Assembly";
+            this.dumpAsm_BT.UseVisualStyleBackColor = true;
+            this.dumpAsm_BT.Click += new System.EventHandler(this.dumpAsm_BT_Click);
+            // 
+            // getIL_BT
+            // 
+            this.getIL_BT.Location = new System.Drawing.Point(3, 95);
+            this.getIL_BT.Name = "getIL_BT";
+            this.getIL_BT.Size = new System.Drawing.Size(172, 32);
+            this.getIL_BT.TabIndex = 2;
+            this.getIL_BT.Text = "Get IL Code";
+            this.getIL_BT.UseVisualStyleBackColor = true;
+            this.getIL_BT.Click += new System.EventHandler(this.getIL_BT_Click);
+            // 
+            // disassemble_CB
+            // 
+            this.disassemble_CB.AutoSize = true;
+            this.disassemble_CB.Location = new System.Drawing.Point(3, 72);
+            this.disassemble_CB.Name = "disassemble_CB";
+            this.disassemble_CB.Size = new System.Drawing.Size(83, 17);
+            this.disassemble_CB.TabIndex = 3;
+            this.disassemble_CB.Text = "disassemble";
+            this.disassemble_CB.UseVisualStyleBackColor = true;
+            // 
+            // splitContainer1
+            // 
+            this.splitContainer1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.splitContainer1.Location = new System.Drawing.Point(0, 0);
+            this.splitContainer1.Name = "splitContainer1";
+            // 
+            // splitContainer1.Panel1
+            // 
+            this.splitContainer1.Panel1.Controls.Add(this.dynamicMethods_LB);
+            this.splitContainer1.Panel1.Controls.Add(this.getIL_BT);
+            this.splitContainer1.Panel1.Controls.Add(this.disassemble_CB);
+            this.splitContainer1.Panel1.Controls.Add(this.dumpAsm_BT);
+            // 
+            // splitContainer1.Panel2
+            // 
+            this.splitContainer1.Panel2.Controls.Add(this.editor_RTB);
+            this.splitContainer1.Size = new System.Drawing.Size(540, 391);
+            this.splitContainer1.SplitterDistance = 180;
+            this.splitContainer1.TabIndex = 5;
+            // 
+            // dynamicMethods_LB
+            // 
+            this.dynamicMethods_LB.ContextMenuStrip = this.dynamicControl;
+            this.dynamicMethods_LB.FormattingEnabled = true;
+            this.dynamicMethods_LB.Location = new System.Drawing.Point(3, 230);
+            this.dynamicMethods_LB.Name = "dynamicMethods_LB";
+            this.dynamicMethods_LB.Size = new System.Drawing.Size(172, 147);
+            this.dynamicMethods_LB.TabIndex = 5;
+            // 
+            // dynamicControl
+            // 
+            this.dynamicControl.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.fireMethodToolStripMenuItem,
+            this.replaceMethodWithCustomCToolStripMenuItem,
+            this.getILCustomCToolStripMenuItem,
+            this.dumpAssemblyCustomCToolStripMenuItem});
+            this.dynamicControl.Name = "contextMenuStrip1";
+            this.dynamicControl.Size = new System.Drawing.Size(250, 92);
+            // 
+            // fireMethodToolStripMenuItem
+            // 
+            this.fireMethodToolStripMenuItem.Name = "fireMethodToolStripMenuItem";
+            this.fireMethodToolStripMenuItem.Size = new System.Drawing.Size(249, 22);
+            this.fireMethodToolStripMenuItem.Text = "Fire Method";
+            this.fireMethodToolStripMenuItem.Click += new System.EventHandler(this.fireMethodToolStripMenuItem_Click);
+            // 
+            // replaceMethodWithCustomCToolStripMenuItem
+            // 
+            this.replaceMethodWithCustomCToolStripMenuItem.Name = "replaceMethodWithCustomCToolStripMenuItem";
+            this.replaceMethodWithCustomCToolStripMenuItem.Size = new System.Drawing.Size(249, 22);
+            this.replaceMethodWithCustomCToolStripMenuItem.Text = "Replace Method with Custom C#";
+            // 
             // getILCustomCToolStripMenuItem
             // 
             this.getILCustomCToolStripMenuItem.Name = "getILCustomCToolStripMenuItem";
@@ -219,12 +210,12 @@
             this.Controls.Add(this.splitContainer1);
             this.Name = "memoryHijacker";
             this.Size = new System.Drawing.Size(540, 391);
+            this.assmblyControlFlow.ResumeLayout(false);
             this.splitContainer1.Panel1.ResumeLayout(false);
             this.splitContainer1.Panel1.PerformLayout();
             this.splitContainer1.Panel2.ResumeLayout(false);
             this.splitContainer1.ResumeLayout(false);
             this.dynamicControl.ResumeLayout(false);
-            this.assmblyControlFlow.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -236,7 +227,6 @@
         private System.Windows.Forms.Button getIL_BT;
         public System.Windows.Forms.CheckBox disassemble_CB;
         private System.Windows.Forms.SplitContainer splitContainer1;
-        private System.Windows.Forms.TextBox realAddress_TB;
         public System.Windows.Forms.ListBox dynamicMethods_LB;
         private System.Windows.Forms.ContextMenuStrip dynamicControl;
         private System.Windows.Forms.ToolStripMenuItem fireMethodToolStripMenuItem;

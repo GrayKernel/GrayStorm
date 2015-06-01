@@ -14,6 +14,8 @@ namespace GrayStorm
 
         public static TextBox _methodLabel_TB;
         public static TextBox _constructorLabel_TB;
+        public static TextBox _addrOfMethod_TB;
+        public static TextBox _addrOfConstructor_TB;
         hierarchyViewer _hierarchyViewer;
         shellcode _shellcode;
         public static memoryHijacker _memoryHijacker;
@@ -31,6 +33,11 @@ namespace GrayStorm
 
             _methodLabel_TB = selectedMethod_TB;
             _constructorLabel_TB = selectedConstructor_TB;
+
+            _addrOfMethod_TB = addrOfMethod_TB;
+            _addrOfConstructor_TB = addrOfConstructor_TB;
+
+            this.Text = "Gray Storm: CLR " + Environment.Version.ToString().ElementAt(0);
         }
 
       

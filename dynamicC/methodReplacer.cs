@@ -51,8 +51,6 @@ namespace GrayStorm.dynamic_C
             IntPtr methodIntPtr;
             unsafe
             {
-
-
                 //x64 place holder
                 if (IntPtr.Size == 8)
                 {
