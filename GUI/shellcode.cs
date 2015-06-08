@@ -91,7 +91,9 @@ namespace GrayStorm
                 return;
 
             int containedIndex = methodHelpers.containedInList(GrayStorm.domainTraverser.currentMethod);
-            if (containedIndex == -1) return;
+            if (containedIndex == -1)
+                return;
+            
             methodHelpers.StorageInformationArrayList[containedIndex].dumped = false;
 
             if (hookMethod_CB.Checked && IntPtr.Size == 4)
@@ -126,8 +128,7 @@ namespace GrayStorm
                 System.Windows.Forms.MessageBox.Show("Payload doesn't support hooking");
                 return;
             }
-
-            MethodInfo safeCall = typeof(shellcode).GetMethod("returnOldMethod", BindingFlags.NonPublic | BindingFlags.Instance);
+            MethodInfo safeCall = typeof(shellcode).GetMethod("returnOldMethod", BindingFlags.Public | BindingFlags.Static);
             IntPtr safeCallPtr = (IntPtr)safeCall.MethodHandle.GetFunctionPointer().ToInt64();
 
             CToAsmAttackChain.payloadCleaner(containedIndex, safeCallPtr, indexToStartCleaning);
@@ -138,6 +139,19 @@ namespace GrayStorm
             GrayStorm.assemblyHelpers.holder = newMemory;
             methodHijacking.writeAMethod(methodHelpers.StorageInformationArrayList[containedIndex].methodIntPtr);
         }
+
+        //method called in the hook phase of the CToAsmAttack cycle. 
+        public static void returnOldMethod(int somePtr, int selectedIndex)
+        {
+            GrayStorm.assemblyHelpers.holder = methodHelpers.StorageInformationArrayList[selectedIndex].oldMethod;
+            methodHijacking.writeAMethod(methodHelpers.StorageInformationArrayList[selectedIndex].methodIntPtr);
+            try
+            {
+
+                methodHelpers.StorageInformationArrayList[selectedIndex].methodDelegate.DynamicInvoke(null, new object[] { });
+            }
+            catch { }
+        } 
 
         //TODO
         private void hookTargetMethod64(int containedIndex)
@@ -162,12 +176,7 @@ namespace GrayStorm
             //methodHijacking.writeAMethod(methodHelpers.StorageInformationArrayList[containedIndex].methodIntPtr);
         }
 
-        //method called in the hook phase of the CToAsmAttack cycle. 
-        private void returnOldMethod(int selectedIndex)
-        {
-            GrayStorm.assemblyHelpers.holder = methodHelpers.StorageInformationArrayList[selectedIndex].oldMethod;
-            methodHijacking.writeAMethod(methodHelpers.StorageInformationArrayList[selectedIndex].methodIntPtr);
-        }
+     
 
         #endregion inject shellcode
 
@@ -182,6 +191,7 @@ namespace GrayStorm
                 GrayStorm.assemblyHelpers.holder = methodHelpers.StorageInformationArrayList[containedIndex].oldMethod;
                 methodHijacking.writeAMethod(methodHelpers.StorageInformationArrayList[containedIndex].methodIntPtr);
                 methodHelpers.StorageInformationArrayList[containedIndex].dumped = false;
+         
             }
             catch { }
         }
@@ -233,8 +243,7 @@ namespace GrayStorm
                 return;
             }
 
-            dataBox newPayload = new dataBox(hookMethod_CB.Text, shellcode, offset);
-            //  newPayload.Add(new shellcode.dataBox(payloadName.Text, shellcode, offset));
+            dataBox newPayload = new dataBox(payloadName_TB.Text, shellcode, offset);
 
             if (metaSploit)
             {

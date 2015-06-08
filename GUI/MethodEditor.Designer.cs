@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             this.intPtrs = new System.Windows.Forms.ListBox();
             this.argumentsLabel = new System.Windows.Forms.Label();
             this.setConstant_Butt = new System.Windows.Forms.Button();
@@ -74,6 +75,8 @@
             this.splitContainer1 = new System.Windows.Forms.SplitContainer();
             this.panel5 = new System.Windows.Forms.Panel();
             this.splitContainer2 = new System.Windows.Forms.SplitContainer();
+            this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.chnageObjectTreeToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.tableLayoutPanel1.SuspendLayout();
             this.panel1.SuspendLayout();
             this.panel2.SuspendLayout();
@@ -87,6 +90,7 @@
             this.splitContainer2.Panel1.SuspendLayout();
             this.splitContainer2.Panel2.SuspendLayout();
             this.splitContainer2.SuspendLayout();
+            this.contextMenuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
             // intPtrs
@@ -143,10 +147,10 @@
             // addArgumentButton
             // 
             this.addArgumentButton.BackColor = System.Drawing.Color.White;
-            this.addArgumentButton.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.addArgumentButton.Dock = System.Windows.Forms.DockStyle.Left;
             this.addArgumentButton.Location = new System.Drawing.Point(3, 159);
             this.addArgumentButton.Name = "addArgumentButton";
-            this.addArgumentButton.Size = new System.Drawing.Size(261, 46);
+            this.addArgumentButton.Size = new System.Drawing.Size(255, 46);
             this.addArgumentButton.TabIndex = 75;
             this.addArgumentButton.Text = "Add";
             this.addArgumentButton.UseVisualStyleBackColor = false;
@@ -166,11 +170,11 @@
             // addArgsTextBox
             // 
             this.addArgsTextBox.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.addArgsTextBox.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.addArgsTextBox.Dock = System.Windows.Forms.DockStyle.Left;
             this.addArgsTextBox.Location = new System.Drawing.Point(3, 107);
             this.addArgsTextBox.Multiline = true;
             this.addArgsTextBox.Name = "addArgsTextBox";
-            this.addArgsTextBox.Size = new System.Drawing.Size(261, 46);
+            this.addArgsTextBox.Size = new System.Drawing.Size(258, 46);
             this.addArgsTextBox.TabIndex = 76;
             // 
             // callInstanceMethodButt
@@ -243,10 +247,10 @@
             // addObjectButton
             // 
             this.addObjectButton.BackColor = System.Drawing.Color.White;
-            this.addObjectButton.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.addObjectButton.Dock = System.Windows.Forms.DockStyle.Left;
             this.addObjectButton.Location = new System.Drawing.Point(3, 211);
             this.addObjectButton.Name = "addObjectButton";
-            this.addObjectButton.Size = new System.Drawing.Size(261, 46);
+            this.addObjectButton.Size = new System.Drawing.Size(255, 46);
             this.addObjectButton.TabIndex = 78;
             this.addObjectButton.Text = "Add Object";
             this.addObjectButton.UseVisualStyleBackColor = false;
@@ -614,6 +618,21 @@
             this.splitContainer2.SplitterDistance = 680;
             this.splitContainer2.TabIndex = 116;
             // 
+            // contextMenuStrip1
+            // 
+            this.contextMenuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.chnageObjectTreeToolStripMenuItem});
+            this.contextMenuStrip1.Name = "contextMenuStrip1";
+            this.contextMenuStrip1.Size = new System.Drawing.Size(180, 48);
+            this.contextMenuStrip1.Text = "objTree";
+            // 
+            // chnageObjectTreeToolStripMenuItem
+            // 
+            this.chnageObjectTreeToolStripMenuItem.Name = "chnageObjectTreeToolStripMenuItem";
+            this.chnageObjectTreeToolStripMenuItem.Size = new System.Drawing.Size(179, 22);
+            this.chnageObjectTreeToolStripMenuItem.Text = "Chnage Object Tree";
+            this.chnageObjectTreeToolStripMenuItem.Click += new System.EventHandler(this.chnageObjectTreeToolStripMenuItem_Click);
+            // 
             // MethodEditor
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -640,6 +659,7 @@
             this.splitContainer2.Panel2.ResumeLayout(false);
             this.splitContainer2.Panel2.PerformLayout();
             this.splitContainer2.ResumeLayout(false);
+            this.contextMenuStrip1.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -692,5 +712,7 @@
         private System.Windows.Forms.Panel panel5;
         private System.Windows.Forms.SplitContainer splitContainer2;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel2;
+        private System.Windows.Forms.ContextMenuStrip contextMenuStrip1;
+        private System.Windows.Forms.ToolStripMenuItem chnageObjectTreeToolStripMenuItem;
     }
 }

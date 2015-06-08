@@ -41,7 +41,7 @@ namespace GrayStorm
         static public byte[] newPrelude(IntPtr payloadAddress)
         {
             int payloadIntPtr = (int)payloadAddress.ToInt64();
-            byte[] newMemory = new byte[7];
+            byte[] newMemory = new byte[8];
             newMemory[0] = 0xb8;
             newMemory[1] = (byte)(payloadIntPtr);
             newMemory[2] = (byte)(payloadIntPtr >> 8);
@@ -49,6 +49,7 @@ namespace GrayStorm
             newMemory[4] = (byte)(payloadIntPtr >> 24); //move eax to payload address
             newMemory[5] = 0xff;
             newMemory[6] = 0xd0; //call eax
+            newMemory[7] = 0xc3; //ret
             return newMemory;
         }
 

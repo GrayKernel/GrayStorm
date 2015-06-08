@@ -337,6 +337,11 @@ namespace GrayStorm.GUI
         {
 
         }
+
+        private void chnageObjectTreeToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            changeObjTree();
+        }
         #endregion events
 
         #region helperMethods
@@ -639,6 +644,8 @@ namespace GrayStorm.GUI
         }
 
         #endregion treeNode
+
+       
 
 
 

@@ -148,6 +148,8 @@ namespace GrayStorm
         public static void writeFunction(byte[] ShellCodeInGoodOut, IntPtr assForeMan)
         {
             IntPtr ptrTemp = new IntPtr(assForeMan.ToInt64());
+            uint old;
+            VirtualProtect(ptrTemp, (uint)8, 0x40, out old);
 
             for (int i = 0; i < ShellCodeInGoodOut.Length; i++)
             {

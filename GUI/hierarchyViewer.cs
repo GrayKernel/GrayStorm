@@ -96,7 +96,7 @@ namespace GrayStorm
                     foreach (Type type in types)
                     {
                         System.Windows.Forms.TreeNode asmClass = new TreeNode(type.ToString());
-                        if (!domainClasses.ContainsKey(asmClass))
+                        if (!domainClasses.ContainsKey(theSelectedNode))
                             makeMethodandFunctionList(asmClass, type);
                         domainClasses.Add(asmClass, type);
                         theSelectedNode.Nodes.Add(asmClass);
@@ -136,7 +136,7 @@ namespace GrayStorm
 
                 foreach (MethodInfo classMethods in methodInfo)
                 {
-                    System.Windows.Forms.TreeNode asmMethod = new TreeNode(classMethods.Name);
+                    System.Windows.Forms.TreeNode asmMethod = new TreeNode(classMethods.ToString());
                     parent.Nodes.Add(asmMethod);
                     methods.Add(asmMethod, classMethods);
                 }
