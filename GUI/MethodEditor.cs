@@ -71,7 +71,7 @@ namespace GrayStorm.GUI
                             stringType = constructorParams[i].ParameterType.Name;
                             try
                             {
-                                argObjects[i] = parseObject(ob, stringType);
+                                argObjects[i] = parseObject(stringType, ob);
                             }
                             catch (Exception Exception)
                             {
@@ -213,18 +213,19 @@ namespace GrayStorm.GUI
         {
             try
             {
-                if (properyInfoString != null)
+                string curProperyInfoString = propertiesListBox.SelectedItem.ToString();
+                if (curProperyInfoString != null)
                 {
                     object x = 0;
 
-                    string curProperyInfoString = propertiesListBox.SelectedItem.ToString();
-                    curProperyInfoString = properyInfoString.Substring(properyInfoString.IndexOf(" ") + 1);
+
+                    curProperyInfoString = curProperyInfoString.Substring(curProperyInfoString.IndexOf(" ") + 1);
 
                     PropertyInfo info = domainTraverser.curObject.GetType().GetProperty(curProperyInfoString);
                     string stringType = propertiesListBox.SelectedItem.ToString(); 
                     stringType = stringType.Substring(0, stringType.LastIndexOf(" ")).Trim();
 
-                    x = parseObject(stringType.GetType(), propertyValueTextBox.Text);
+                    x = parseObject(stringType, propertyValueTextBox.Text);
                     info.SetValue(domainTraverser.curObject, x, null);
                 }
             }
@@ -238,11 +239,10 @@ namespace GrayStorm.GUI
         {
             try
             {
-                if (fieldInfoString != null)
+                string fieldName = fieldsListBox.SelectedItem.ToString();
+                if (fieldName != null)
                 {
                     object x = 0;
-
-                    string fieldName = fieldsListBox.SelectedItem.ToString();
                     fieldName = fieldName.Substring(fieldName.IndexOf(" ") + 1);
 
                     FieldInfo info = domainTraverser.curObject.GetType().GetField(fieldName);
@@ -250,7 +250,7 @@ namespace GrayStorm.GUI
                     stringType = stringType.Substring(0, stringType.LastIndexOf(" ")).Trim();
 
                     object ob = fieldValueTextBox.Text;
-                    x = parseObject(stringType.GetType(), fieldValueTextBox.Text);
+                    x = parseObject(stringType, fieldValueTextBox.Text);
                     info.SetValue(domainTraverser.curObject, x);
                 }
             }
@@ -346,7 +346,7 @@ namespace GrayStorm.GUI
 
         #region helperMethods
         //TODO ADD INTPTR FUNCS
-        private object parseObject(object ob, string stringType)
+        private object parseObject(object stringType, object ob )
         {
             try
             {
@@ -449,7 +449,7 @@ namespace GrayStorm.GUI
                     stringType = instancePars[i].ParameterType.Name;
                     try
                     {
-                        argObjects[i] = parseObject(ob, stringType);
+                        argObjects[i] = parseObject(stringType, ob);
                     }
                     catch (Exception Exception)
                     {

@@ -623,7 +623,7 @@
             this.contextMenuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.chnageObjectTreeToolStripMenuItem});
             this.contextMenuStrip1.Name = "contextMenuStrip1";
-            this.contextMenuStrip1.Size = new System.Drawing.Size(180, 48);
+            this.contextMenuStrip1.Size = new System.Drawing.Size(180, 26);
             this.contextMenuStrip1.Text = "objTree";
             // 
             // chnageObjectTreeToolStripMenuItem
