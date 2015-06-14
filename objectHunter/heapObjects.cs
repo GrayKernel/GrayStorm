@@ -51,14 +51,13 @@ namespace GrayStorm.objectHunter
                 methodTable = getObjectMethodTable(obj, getMethodTablex86);
 
                 if (methodTable == IntPtr.Zero)
-                    return
-;
+                    return;
+
                 Console.WriteLine("OG Object is at " + obj.ToString("X"));
                 Console.WriteLine("method table is at " + methodTable.ToString("X"));
 
                 System.Windows.Forms.MessageBox.Show("OG Object is at " + obj.ToString("X"));
                 System.Windows.Forms.MessageBox.Show("method table is at " + methodTable.ToString("X"));
-
                 matchedObjects = getAllObjects(obj, methodTable, getMethodTablex86, getMethodTablex86);
             }
             else if (IntPtr.Size == 8)
@@ -114,8 +113,8 @@ namespace GrayStorm.objectHunter
             IntPtr objectPointer = IntPtr.Zero;
             unsafe
             {
-                //System.Windows.Forms.MessageBox.Show("Address of objectPointer:" + (uint)(&objectPointer) + " " + *(&objectPointer));
-                //System.Windows.Forms.MessageBox.Show("Address of refer:" + (uint)(&objectPointer- 3) + " " + *(&objectPointer - 3));
+                System.Windows.Forms.MessageBox.Show("Address of objectPointer:" + (uint)(&objectPointer) + " " + *(&objectPointer));
+                System.Windows.Forms.MessageBox.Show("Address of refer:" + (uint)(&objectPointer- 3) + " " + *(&objectPointer - 3));
                 return *(&objectPointer - 3);
             }
            // return objectPointer;
