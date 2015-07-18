@@ -58,8 +58,6 @@ namespace GrayStorm
             selectedConstructor += hierarchyViewer_selectedConstructor;
             buildTree();
         }
-
-
         #endregion init
 
         #region treeNode
@@ -67,6 +65,7 @@ namespace GrayStorm
         System.Collections.Generic.Dictionary<TreeNode, Type> domainClasses = new Dictionary<TreeNode, Type>();
         System.Collections.Generic.Dictionary<TreeNode, MethodInfo> methods = new Dictionary<TreeNode, MethodInfo>();
         System.Collections.Generic.Dictionary<TreeNode, ConstructorInfo> constructors = new Dictionary<TreeNode, ConstructorInfo>();
+        System.Collections.ArrayList assembliesCreated = new System.Collections.ArrayList();
 
         public void buildTree()
         {
@@ -88,7 +87,7 @@ namespace GrayStorm
 
             if (theSelectedNode != null)
             {
-                if (domainAssemblies.ContainsKey(theSelectedNode))
+                if (domainAssemblies.ContainsKey(theSelectedNode) && !assembliesCreated.Contains(theSelectedNode))
                 {
                     Assembly assemblySelected = domainAssemblies[theSelectedNode];
                     
@@ -96,12 +95,11 @@ namespace GrayStorm
                     foreach (Type type in types)
                     {
                         System.Windows.Forms.TreeNode asmClass = new TreeNode(type.ToString());
-                        if (!domainClasses.ContainsKey(theSelectedNode))
-                            makeMethodandFunctionList(asmClass, type);
+                        makeMethodandFunctionList(asmClass, type);
                         domainClasses.Add(asmClass, type);
                         theSelectedNode.Nodes.Add(asmClass);
-                      
                     }
+                    assembliesCreated.Add(theSelectedNode);
                     hierarchyViewer_TN.Sort();
                 }
                 else if (methods.ContainsKey(theSelectedNode))
@@ -118,8 +116,6 @@ namespace GrayStorm
                     Assembly assemblySelected = domainAssemblies[theSelectedNode.Parent.Parent];
                     domainTraverser.assemblyInfo = assemblySelected;
                     domainTraverser.typeInfo = assemblySelected.GetType(theSelectedNode.Parent.Text);
-                  
-
 
                     if (selectedConstructor != null && constructorSelected != null)
                         selectedConstructor(constructorSelected, theSelectedNode);
@@ -151,7 +147,7 @@ namespace GrayStorm
             }
             catch { }
         }
-        #endregion
+        #endregion treeNode
 
         #region rightClickMenu
 
@@ -253,8 +249,6 @@ namespace GrayStorm
         }
 
         #endregion rightClickMenu
-
-       
     }
 }
     

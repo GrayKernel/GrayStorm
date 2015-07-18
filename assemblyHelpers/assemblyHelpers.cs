@@ -145,16 +145,14 @@ namespace GrayStorm
         }
 
         //dirty deeds! 
-        public static void writeFunction(byte[] ShellCodeInGoodOut, IntPtr assForeMan)
+        public static void writeFunction(byte[] ShellCodeInGoodOut, IntPtr ptrTemp)
         {
-            IntPtr ptrTemp = new IntPtr(assForeMan.ToInt64());
             uint old;
             VirtualProtect(ptrTemp, (uint)8, 0x40, out old);
 
             for (int i = 0; i < ShellCodeInGoodOut.Length; i++)
             {
-                IntPtr temp = new IntPtr(ptrTemp.ToInt64() + i);
-                System.Runtime.InteropServices.Marshal.WriteByte(temp, ShellCodeInGoodOut[i]);
+                System.Runtime.InteropServices.Marshal.WriteByte(new IntPtr(ptrTemp.ToInt64() + i), ShellCodeInGoodOut[i]);
             }
         }
         #endregion
