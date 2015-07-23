@@ -14,10 +14,10 @@ namespace GrayStorm
         [STAThread]
         public static void Main()
         {
+            //Still using tricks to ensure two GUI threads don't cause application hang even though this is also handled in the injector, GrayFrost. 
             if (!System.AppDomain.CurrentDomain.FriendlyName.Contains("GrayStorm"))
             {
                 string name = System.Reflection.Assembly.GetCallingAssembly().FullName;
-                //  System.Windows.Forms.MessageBox.Show(name);
                 System.Threading.ThreadPool.QueueUserWorkItem(new System.Threading.WaitCallback(
                 delegate
                 {

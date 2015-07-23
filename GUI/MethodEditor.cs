@@ -51,6 +51,8 @@ namespace GrayStorm.GUI
 
         private void callConstructorButt_Click(object sender, EventArgs e)
         {
+            if (domainTraverser.currentConstructor == null)
+                return;
             int numberOfArgs = domainTraverser.currentConstructor.GetParameters().Length;
             addArgsTextBox.Text = "Click new constructor or method.";
             if (domainTraverser.currentConstructor != null && methodArgs.Count == numberOfArgs)
@@ -211,52 +213,56 @@ namespace GrayStorm.GUI
 
         private void changePropertyValueButt_Click(object sender, EventArgs e)
         {
-            try
+            if (propertiesListBox.SelectedItem != null)
             {
-                string curProperyInfoString = propertiesListBox.SelectedItem.ToString();
-                if (curProperyInfoString != null)
+                try
                 {
-                    object x = 0;
+                    string curProperyInfoString = propertiesListBox.SelectedItem.ToString();
+                    if (curProperyInfoString != null)
+                    {
+                        object x = 0;
+                        curProperyInfoString = curProperyInfoString.Substring(curProperyInfoString.IndexOf(" ") + 1);
 
+                        PropertyInfo info = domainTraverser.curObject.GetType().GetProperty(curProperyInfoString);
+                        string stringType = propertiesListBox.SelectedItem.ToString();
+                        stringType = stringType.Substring(0, stringType.LastIndexOf(" ")).Trim();
 
-                    curProperyInfoString = curProperyInfoString.Substring(curProperyInfoString.IndexOf(" ") + 1);
-
-                    PropertyInfo info = domainTraverser.curObject.GetType().GetProperty(curProperyInfoString);
-                    string stringType = propertiesListBox.SelectedItem.ToString(); 
-                    stringType = stringType.Substring(0, stringType.LastIndexOf(" ")).Trim();
-
-                    x = parseObject(stringType, propertyValueTextBox.Text);
-                    info.SetValue(domainTraverser.curObject, x, null);
+                        x = parseObject(stringType, propertyValueTextBox.Text);
+                        info.SetValue(domainTraverser.curObject, x, null);
+                    }
                 }
-            }
-            catch (Exception f)
-            {
-                System.Windows.Forms.MessageBox.Show("Unable to use this variable " + f.Message);
+                catch (Exception f)
+                {
+                    System.Windows.Forms.MessageBox.Show("Unable to use this variable " + f.Message);
+                }
             }
         }
 
         private void changeFieldValueButt_Click(object sender, EventArgs e)
         {
-            try
+            if (fieldsListBox.SelectedItem != null)
             {
-                string fieldName = fieldsListBox.SelectedItem.ToString();
-                if (fieldName != null)
+                try
                 {
-                    object x = 0;
-                    fieldName = fieldName.Substring(fieldName.IndexOf(" ") + 1);
+                    string fieldName = fieldsListBox.SelectedItem.ToString();
+                    if (fieldName != null)
+                    {
+                        object x = 0;
+                        fieldName = fieldName.Substring(fieldName.IndexOf(" ") + 1);
 
-                    FieldInfo info = domainTraverser.curObject.GetType().GetField(fieldName);
-                    string stringType = fieldsListBox.SelectedItem.ToString(); ;
-                    stringType = stringType.Substring(0, stringType.LastIndexOf(" ")).Trim();
+                        FieldInfo info = domainTraverser.curObject.GetType().GetField(fieldName);
+                        string stringType = fieldsListBox.SelectedItem.ToString(); ;
+                        stringType = stringType.Substring(0, stringType.LastIndexOf(" ")).Trim();
 
-                    object ob = fieldValueTextBox.Text;
-                    x = parseObject(stringType, fieldValueTextBox.Text);
-                    info.SetValue(domainTraverser.curObject, x);
+                        object ob = fieldValueTextBox.Text;
+                        x = parseObject(stringType, fieldValueTextBox.Text);
+                        info.SetValue(domainTraverser.curObject, x);
+                    }
                 }
-            }
-            catch (Exception f)
-            {
-                System.Windows.Forms.MessageBox.Show("Unable to use this variable " + f.Message);
+                catch (Exception f)
+                {
+                    System.Windows.Forms.MessageBox.Show("Unable to use this variable " + f.Message);
+                }
             }
         }
 

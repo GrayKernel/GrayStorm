@@ -98,7 +98,6 @@
     <Compile Include="GUI\shellcode.Designer.cs">
       <DependentUpon>shellcode.cs</DependentUpon>
     </Compile>
-    <Compile Include="memoryHijacking\methodDumping.cs" />
     <Compile Include="memoryHijacking\methodHelpers.cs" />
     <Compile Include="memoryHijacking\methodHijacking.cs" />
     <Compile Include="memoryHijacking\methodInvoking.cs" />

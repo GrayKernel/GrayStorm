@@ -37,7 +37,7 @@ namespace GrayStorm
             _addrOfMethod_TB = addrOfMethod_TB;
             _addrOfConstructor_TB = addrOfConstructor_TB;
 
-            this.Text = "Gray Storm: CLR " + Environment.Version.ToString().ElementAt(0);
+            this.Text = "Gray Storm: Injected into CLR version " + Environment.Version.ToString().ElementAt(0);
         }
 
       

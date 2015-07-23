@@ -12,7 +12,6 @@ using System.Collections.Generic;
 
 namespace GrayStorm
 {
-
     #region storageInformationHelpers
     /// <summary>
     /// All of the global static variables we need for the project will be declared here. Namely, the array list of storageInformation. 

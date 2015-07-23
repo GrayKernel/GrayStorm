@@ -32,11 +32,10 @@ namespace GrayStorm
             int containedIndex = methodHelpers.containedInList(domainTraverser.currentMethod);
             if (containedIndex == -1 || methodHelpers.StorageInformationArrayList[containedIndex].dumped != true)
             {
-                methodDumping dumper = new methodDumping();
                 byte[] memory;
                 if (containedIndex != -1)
                 {
-                    memory = dumper.dumpAMethod(methodHelpers.StorageInformationArrayList[containedIndex].methodIntPtr);
+                    memory = assemblyHelpers.DumpAFunction(methodHelpers.StorageInformationArrayList[containedIndex].methodIntPtr);
                     grayStorm._addrOfMethod_TB.Text = methodHelpers.StorageInformationArrayList[containedIndex].methodIntPtr.ToString("X");
                     if (memory == null)
                     {
@@ -56,7 +55,7 @@ namespace GrayStorm
                     grayStorm._addrOfMethod_TB.Text = domainTraverser.currentMethod.MethodHandle.GetFunctionPointer().ToString("X");
                     targetMethodDelegate = invokeMethods.getMethodDelegate(domainTraverser.currentMethod); //Get the Delegate of the method.                    
                     trueIntPtr = invokeMethods.getIntPtrFromDelegate(targetMethodDelegate);
-                    memory = dumper.dumpAMethod(trueIntPtr);
+                    memory = assemblyHelpers.DumpAFunction(trueIntPtr);
                     if (memory == null)
                     {
                         editor_RTB.AppendText(String.Format("COULD NOT READ MEMORY\n"));
@@ -156,28 +155,27 @@ namespace GrayStorm
         private void dumpAssemblyCustomCToolStripMenuItem_Click(object sender, EventArgs e)
         {
             var selectedMethod = dynamicMethods_LB.SelectedItem as MethodInfo;
-             methodDumping dumper = new methodDumping();
-             methodInvoking invokeMethods = new methodInvoking();
-                byte[] memory;
-                if (selectedMethod != null)
+            methodInvoking invokeMethods = new methodInvoking();
+            byte[] memory;
+            if (selectedMethod != null)
+            {
+                System.Runtime.CompilerServices.RuntimeHelpers.PrepareMethod(selectedMethod.MethodHandle); //JIT the method! 
+                Delegate targetMethodDelegate = invokeMethods.getMethodDelegate(domainTraverser.currentMethod); //Get the Delegate of the method.                    
+                IntPtr trueIntPtr = invokeMethods.getIntPtrFromDelegate(targetMethodDelegate);
+                memory = assemblyHelpers.DumpAFunction(trueIntPtr);
+                if (memory == null)
                 {
-                    System.Runtime.CompilerServices.RuntimeHelpers.PrepareMethod(selectedMethod.MethodHandle); //JIT the method! 
-                    Delegate targetMethodDelegate = invokeMethods.getMethodDelegate(domainTraverser.currentMethod); //Get the Delegate of the method.                    
-                    IntPtr trueIntPtr = invokeMethods.getIntPtrFromDelegate(targetMethodDelegate);
-                    memory = dumper.dumpAMethod(trueIntPtr);
-                    if (memory == null)
+                    editor_RTB.AppendText(String.Format("COULD NOT READ MEMORY\n"));
+                    return;
+                }
+                else
+                {
+                    foreach (byte b in memory)
                     {
-                        editor_RTB.AppendText(String.Format("COULD NOT READ MEMORY\n"));
-                        return;
-                    }
-                    else
-                    {
-                        foreach (byte b in memory)
-                        {
-                            editor_RTB.AppendText(String.Format("0x{0:X2}\n", b));
-                        }
+                        editor_RTB.AppendText(String.Format("0x{0:X2}\n", b));
                     }
                 }
+            }
         }
         #endregion buttons
 
@@ -205,21 +203,6 @@ namespace GrayStorm
             return trueIntPtr;
         }
         #endregion helpers
-
-
-       
-
-     
-    
-
-        
-
-     
-
-    
-
-       
-      
     }
 }
 

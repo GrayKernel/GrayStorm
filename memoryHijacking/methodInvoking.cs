@@ -22,7 +22,7 @@ namespace GrayStorm
             return targetMethodDelegate;
         }
 
-        //2.) Get the function pointer from the Delehate
+        //2.) Get the function pointer from the Delegate
         public IntPtr getIntPtrFromDelegate(Delegate targetIN)
         {
             try

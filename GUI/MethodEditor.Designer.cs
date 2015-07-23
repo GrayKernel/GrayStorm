@@ -312,7 +312,7 @@
             // 
             this.fieldsLabel.AutoSize = true;
             this.fieldsLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.fieldsLabel.Location = new System.Drawing.Point(12, 159);
+            this.fieldsLabel.Location = new System.Drawing.Point(12, 226);
             this.fieldsLabel.Name = "fieldsLabel";
             this.fieldsLabel.Size = new System.Drawing.Size(67, 24);
             this.fieldsLabel.TabIndex = 96;
@@ -321,7 +321,7 @@
             // fieldsListBox
             // 
             this.fieldsListBox.FormattingEnabled = true;
-            this.fieldsListBox.Location = new System.Drawing.Point(16, 186);
+            this.fieldsListBox.Location = new System.Drawing.Point(16, 253);
             this.fieldsListBox.Name = "fieldsListBox";
             this.fieldsListBox.Size = new System.Drawing.Size(327, 82);
             this.fieldsListBox.TabIndex = 97;
@@ -362,7 +362,7 @@
             // 
             this.fieldValueLabel.AutoSize = true;
             this.fieldValueLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.fieldValueLabel.Location = new System.Drawing.Point(349, 186);
+            this.fieldValueLabel.Location = new System.Drawing.Point(13, 352);
             this.fieldValueLabel.Name = "fieldValueLabel";
             this.fieldValueLabel.Size = new System.Drawing.Size(49, 17);
             this.fieldValueLabel.TabIndex = 102;
@@ -372,7 +372,7 @@
             // 
             this.setValueLabel.AutoSize = true;
             this.setValueLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.setValueLabel.Location = new System.Drawing.Point(412, 186);
+            this.setValueLabel.Location = new System.Drawing.Point(76, 352);
             this.setValueLabel.Name = "setValueLabel";
             this.setValueLabel.Size = new System.Drawing.Size(72, 17);
             this.setValueLabel.TabIndex = 103;
@@ -380,7 +380,7 @@
             // 
             // fieldValueTextBox
             // 
-            this.fieldValueTextBox.Location = new System.Drawing.Point(415, 203);
+            this.fieldValueTextBox.Location = new System.Drawing.Point(79, 374);
             this.fieldValueTextBox.Name = "fieldValueTextBox";
             this.fieldValueTextBox.Size = new System.Drawing.Size(100, 20);
             this.fieldValueTextBox.TabIndex = 104;
@@ -388,7 +388,7 @@
             // fieldValuePlacerholder
             // 
             this.fieldValuePlacerholder.AutoSize = true;
-            this.fieldValuePlacerholder.Location = new System.Drawing.Point(349, 203);
+            this.fieldValuePlacerholder.Location = new System.Drawing.Point(13, 374);
             this.fieldValuePlacerholder.Name = "fieldValuePlacerholder";
             this.fieldValuePlacerholder.Size = new System.Drawing.Size(33, 13);
             this.fieldValuePlacerholder.TabIndex = 105;
@@ -396,7 +396,7 @@
             // 
             // changeFieldValueButt
             // 
-            this.changeFieldValueButt.Location = new System.Drawing.Point(415, 229);
+            this.changeFieldValueButt.Location = new System.Drawing.Point(79, 400);
             this.changeFieldValueButt.Name = "changeFieldValueButt";
             this.changeFieldValueButt.Size = new System.Drawing.Size(100, 23);
             this.changeFieldValueButt.TabIndex = 106;
@@ -407,7 +407,7 @@
             // propertyValuePlaceholder
             // 
             this.propertyValuePlaceholder.AutoSize = true;
-            this.propertyValuePlaceholder.Location = new System.Drawing.Point(350, 56);
+            this.propertyValuePlaceholder.Location = new System.Drawing.Point(13, 154);
             this.propertyValuePlaceholder.Name = "propertyValuePlaceholder";
             this.propertyValuePlaceholder.Size = new System.Drawing.Size(33, 13);
             this.propertyValuePlaceholder.TabIndex = 111;
@@ -417,7 +417,7 @@
             // 
             this.propertyValueLabel.AutoSize = true;
             this.propertyValueLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.propertyValueLabel.Location = new System.Drawing.Point(350, 36);
+            this.propertyValueLabel.Location = new System.Drawing.Point(13, 131);
             this.propertyValueLabel.Name = "propertyValueLabel";
             this.propertyValueLabel.Size = new System.Drawing.Size(48, 16);
             this.propertyValueLabel.TabIndex = 110;
@@ -427,7 +427,7 @@
             // 
             this.propertiesSetValueLabel.AutoSize = true;
             this.propertiesSetValueLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.propertiesSetValueLabel.Location = new System.Drawing.Point(417, 36);
+            this.propertiesSetValueLabel.Location = new System.Drawing.Point(80, 131);
             this.propertiesSetValueLabel.Name = "propertiesSetValueLabel";
             this.propertiesSetValueLabel.Size = new System.Drawing.Size(94, 16);
             this.propertiesSetValueLabel.TabIndex = 107;
@@ -435,14 +435,14 @@
             // 
             // propertyValueTextBox
             // 
-            this.propertyValueTextBox.Location = new System.Drawing.Point(420, 59);
+            this.propertyValueTextBox.Location = new System.Drawing.Point(83, 154);
             this.propertyValueTextBox.Name = "propertyValueTextBox";
             this.propertyValueTextBox.Size = new System.Drawing.Size(100, 20);
             this.propertyValueTextBox.TabIndex = 108;
             // 
             // changePropertyValueButt
             // 
-            this.changePropertyValueButt.Location = new System.Drawing.Point(420, 85);
+            this.changePropertyValueButt.Location = new System.Drawing.Point(83, 180);
             this.changePropertyValueButt.Name = "changePropertyValueButt";
             this.changePropertyValueButt.Size = new System.Drawing.Size(100, 23);
             this.changePropertyValueButt.TabIndex = 109;

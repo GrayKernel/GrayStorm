@@ -1,0 +1,12 @@
+Changelog
+
+08.05.2015 GrayStorm-1.0
+
+	* Initial release of Gray Storm for DEF CON 23
+	* Hunt objects from the Managed Heap
+	* Attack the .NET JIT 
+	* Rewrite a Method's raw ASM 
+	* View IL of a Method
+	* Dump ASM from a Method
+	* Disassemble a Method's ASM using BeaEngine
+	
