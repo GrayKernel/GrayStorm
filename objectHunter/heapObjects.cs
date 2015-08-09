@@ -46,7 +46,7 @@ namespace GrayStorm.objectHunter
             if (IntPtr.Size == 4)
             {
                 obj = getObjectAddr(thisObject);
-                System.Windows.Forms.MessageBox.Show("OG Object is at " + obj.ToString("X"));
+               // System.Windows.Forms.MessageBox.Show("OG Object is at " + obj.ToString("X"));
 
                 methodTable = getObjectMethodTable(obj, getMethodTablex86);
 
@@ -56,17 +56,17 @@ namespace GrayStorm.objectHunter
                 Console.WriteLine("OG Object is at " + obj.ToString("X"));
                 Console.WriteLine("method table is at " + methodTable.ToString("X"));
 
-                System.Windows.Forms.MessageBox.Show("OG Object is at " + obj.ToString("X"));
-                System.Windows.Forms.MessageBox.Show("method table is at " + methodTable.ToString("X"));
+               // System.Windows.Forms.MessageBox.Show("OG Object is at " + obj.ToString("X"));
+               // System.Windows.Forms.MessageBox.Show("method table is at " + methodTable.ToString("X"));
                 matchedObjects = getAllObjects(obj, methodTable, getMethodTablex86, getMethodTablex86);
             }
             else if (IntPtr.Size == 8)
             {
                 obj = getObjectAddr64(thisObject);
-                System.Windows.Forms.MessageBox.Show("OG Object is at " + obj.ToString("X"));
+               // System.Windows.Forms.MessageBox.Show("OG Object is at " + obj.ToString("X"));
 
                 methodTable = getObjectMethodTable(obj, getMethodTablex64);
-                System.Windows.Forms.MessageBox.Show("OG MEtodTable is at " + methodTable.ToString("X"));
+             //   System.Windows.Forms.MessageBox.Show("OG MEtodTable is at " + methodTable.ToString("X"));
 
                 matchedObjects = getAllObjects(obj, methodTable, getMethodTablex64, get3rdEntryx64);
             }
@@ -95,7 +95,7 @@ namespace GrayStorm.objectHunter
                     //}
                 }
             }
-            System.Windows.Forms.MessageBox.Show("num of objects is " + objectsListBox.Items.Count);
+           // System.Windows.Forms.MessageBox.Show("num of objects is " + objectsListBox.Items.Count);
         }
         #endregion init
 
@@ -113,8 +113,8 @@ namespace GrayStorm.objectHunter
             IntPtr objectPointer = IntPtr.Zero;
             unsafe
             {
-                System.Windows.Forms.MessageBox.Show("Address of objectPointer:" + (uint)(&objectPointer) + " " + *(&objectPointer));
-                System.Windows.Forms.MessageBox.Show("Address of refer:" + (uint)(&objectPointer- 3) + " " + *(&objectPointer - 3));
+           //     System.Windows.Forms.MessageBox.Show("Address of objectPointer:" + (uint)(&objectPointer) + " " + *(&objectPointer));
+           //     System.Windows.Forms.MessageBox.Show("Address of refer:" + (uint)(&objectPointer- 3) + " " + *(&objectPointer - 3));
                 return *(&objectPointer - 3);
             }
            // return objectPointer;
@@ -242,15 +242,11 @@ namespace GrayStorm.objectHunter
             IntPtr getMethodTablefuncPtr = assemblyHelpers.VirtualAlloc(typeOfASM);
             getMethodTableDel fireShellcode = (getMethodTableDel)System.Runtime.InteropServices.Marshal.GetDelegateForFunctionPointer(getMethodTablefuncPtr, typeof(getMethodTableDel));
 
-
             IntPtr get3rdEntry = assemblyHelpers.VirtualAlloc(entryIN);
             getMethodTableDel getSecondRef = (getMethodTableDel)System.Runtime.InteropServices.Marshal.GetDelegateForFunctionPointer(get3rdEntry, typeof(getMethodTableDel));
 
             IntPtr thirdTable = getSecondRef(firstObjectPointer);
-            System.Windows.Forms.MessageBox.Show("Third entry at " + thirdTable.ToString("X"));
-
-
-
+        //    System.Windows.Forms.MessageBox.Show("Third entry at " + thirdTable.ToString("X"));
 
             //count down first until out of the heap 
             while (true)
@@ -338,7 +334,7 @@ namespace GrayStorm.objectHunter
 
                 }
             }
-            System.Windows.Forms.MessageBox.Show(testObjectLocation.ToString("X"));
+         //   System.Windows.Forms.MessageBox.Show(testObjectLocation.ToString("X"));
 
 
             assemblyHelpers.VirtualFree(getMethodTablefuncPtr, 0, 0x8000);
