@@ -11,18 +11,18 @@ namespace GrayStorm.dynamic_C
 {
     class methodReplacer
     {
-        public static void replaceIL(MethodInfo replacementMethod, MethodInfo newMethod)
+        public static void replaceIL(MethodInfo originalMethod, MethodInfo newMethod)
         {
             //make new user inputted method
             //MethodInfo newMethod = liveMethod.userInputMethod();
-            if (newMethod == null || replacementMethod == null)
+            if (newMethod == null || originalMethod == null)
                 return;
 
             // Jit the method if not already
             RuntimeHelpers.PrepareMethod(newMethod.MethodHandle);
 
             //replace non-dynaically 
-            ReplaceMethod(newMethod, replacementMethod, false);
+            ReplaceMethod(newMethod, originalMethod, false);
         }
 
         public static void DynamicreplaceIL(MethodInfo replacementMethod, int containedIndex)
@@ -41,43 +41,35 @@ namespace GrayStorm.dynamic_C
         /// </summary>
         /// <param name="dynamicMethod">the destination dynamicMethod/IntPtr</param>
         /// <param name="replacementMethod">the source method/IntPtr</param>
-        public static void ReplaceMethod(MethodInfo dynamicMethod, MethodInfo replacementMethod, bool dynamicPtr)
+        /// <param name="dynamicPtr">Whether or not the dynamicMethod is dynamic</param>
+        public static void ReplaceMethod(MethodInfo replacementMethod, MethodInfo originalMethod, bool dynamicPtr)
         {
             IntPtr dynamicIntPtr = IntPtr.Zero;
+            IntPtr originalMethodIntPtr = IntPtr.Zero;
 
-            if (dynamicPtr)
-                dynamicIntPtr = getDynamicIntPtr(dynamicMethod);
-
-            IntPtr methodIntPtr;
             unsafe
             {
-                //x64 place holder
-                if (IntPtr.Size == 8)
-                {
-                    methodIntPtr = (IntPtr)(((int*)replacementMethod.MethodHandle.Value.ToPointer() + 2));
-                    if (!dynamicPtr)
-                        dynamicIntPtr = (IntPtr)(((int*)dynamicMethod.MethodHandle.Value.ToPointer() + 2));
+                originalMethodIntPtr = (IntPtr)(((int*)originalMethod.MethodHandle.Value.ToPointer() + 2));
 
-                    ulong* overwriteIntPtr = (ulong*)methodIntPtr.ToPointer();
-                    if (dynamicPtr)
-                        *overwriteIntPtr = (ulong)dynamicIntPtr.ToInt64();
-                    else
-                        *overwriteIntPtr = *((uint*)dynamicIntPtr.ToPointer());
-                }
-                //x86
+                if (!dynamicPtr)
+                    dynamicIntPtr = (IntPtr)(((int*)replacementMethod.MethodHandle.Value.ToPointer() + 2));
                 else
+                    dynamicIntPtr = getDynamicIntPtr(replacementMethod);
+
+                ulong* overwriteIntPtr = (ulong*)originalMethodIntPtr.ToPointer();
+                if (dynamicPtr)
                 {
-                    methodIntPtr = (IntPtr)(((int*)replacementMethod.MethodHandle.Value.ToPointer() + 2));
-                    if (!dynamicPtr)
-                        dynamicIntPtr = (IntPtr)(((int*)dynamicMethod.MethodHandle.Value.ToPointer() + 2));
-
-                    uint* overwriteIntPtr = (uint*)methodIntPtr.ToPointer();
-
-                    if (dynamicPtr)
-                        *overwriteIntPtr = (uint)dynamicIntPtr.ToInt32();
+                    if (IntPtr.Size == 8)
+                    {
+                        *overwriteIntPtr = (ulong)dynamicIntPtr.ToInt64();
+                    }
                     else
-                        *overwriteIntPtr = *((uint*)dynamicIntPtr.ToPointer());
+                    {
+                            *overwriteIntPtr = (uint)dynamicIntPtr.ToInt32();
+                    }
                 }
+                else
+                    *overwriteIntPtr = *((uint*)dynamicIntPtr.ToPointer());
             }
         }
 
