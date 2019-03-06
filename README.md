@@ -1,4 +1,4 @@
-#GrayStorm
+# GrayStorm
 
 GrayStorm is an in memory attack platform that targets the .NET Framework and is injectable by utilizing [GrayFrost](https://github.com/graykernel/GrayFrost "GrayFrost"). 
 
